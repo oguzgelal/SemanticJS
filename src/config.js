@@ -9,4 +9,6 @@ require.config({
 
 /*
 
+TODO : add URI field to Ontology class (or implement a getURI method)
+
 */
