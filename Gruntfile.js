@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         options: {
           mainConfigFile: 'src/config.js',
           // AMDClean for converting scripts into plain javascript
-          // files instead of including almond
+          // files instead of including almond AMD loader.
           onModuleBundleComplete: function (data) {
             var fs = require('fs'),
             amdclean = require('amdclean'),
