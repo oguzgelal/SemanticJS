@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/API/createEntity.js - SemanticJS</title>
+    <title>src/API/Semant.js - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -38,6 +38,12 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/API.Semant.html">API.Semant</a></li>
+                                <li><a href="../classes/CORE.Entity.html">CORE.Entity</a></li>
+                                <li><a href="../classes/CORE.Exception.html">CORE.Exception</a></li>
+                                <li><a href="../classes/CORE.Exception.createEntityException.html">CORE.Exception.createEntityException</a></li>
+                                <li><a href="../classes/CORE.Exception.createOntologyException.html">CORE.Exception.createOntologyException</a></li>
+                                <li><a href="../classes/CORE.Ontology.html">CORE.Ontology</a></li>
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
@@ -74,34 +80,57 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/API/createEntity.js</h1>
+<h1 class="file-heading">File: src/API/Semant.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* Creates an entity object and attaches it to semant object.
-*
-* @method createEntity
-* @param {String} Name of the Entity.
-* @return {Object} Returns the created entity object.
+Base class of the API.
+
+@class API.Semant
+@static
 */
 
 define(function(){
 
-	var Entity = require(&#x27;CORE/Entity/Entity&#x27;);
-	var createEntityException = require(&#x27;CORE/Exceptions/createEntityException&#x27;);
+	function Semant(){
+		/**
+		List of created ontologies
+		@property ontologies
+		@type Object
+		@default {}
+		*/
+		this.ontologies = {};
+		/**
+		List of occupaid domains
+		@property occupiedDomains
+		@type Array
+		@default []
+		*/
+		this.occupiedDomains = [];
+	}
 
-	var createEntity = function(name){
-		if (typeof name === &#x27;string&#x27;){
-			var entity = new Entity(name);
-			this.entityCollection.push();
-			if (this.debug){ console.log(&quot;Entity &#x27;&quot;+name+&quot;&#x27; created.&quot;); }
-			return entity;
-		}
-		else{ throw new createEntityException(&quot;Argument of &#x27;createEntity&#x27; must be of type &#x27;String&#x27; and indicate the name of the entity.&quot;); }
+	Semant.prototype.createOntology = require(&quot;API/createOntology&quot;);
+	/**
+	Change debug mode
+	@method setDebug
+	@param {Boolean} debug Set global debug value to this.
+	@example
+		semantics.setDebug(true);
+	*/
+	Semant.prototype.setDebug = function(debug){
+		if (typeof debug === &quot;boolean&quot;){ SEMANTICS.debug = debug; }
 	};
+	/**
+	Get debug mode
+	@method getDebug
+	@return {Boolean} Global debug value;
+	@example
+		semantics.getDebug();
+	*/
+	Semant.prototype.getDebug = function(){ return SEMANTICS.debug; };
 
-	return createEntity;
+	return Semant;
 });
     </pre>
 </div>

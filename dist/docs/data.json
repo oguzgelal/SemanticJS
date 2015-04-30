@@ -5,35 +5,400 @@
         "version": "1.0.0"
     },
     "files": {
-        "src/API/createEntity.js": {
-            "name": "src/API/createEntity.js",
+        "src/API/Semant.js": {
+            "name": "src/API/Semant.js",
+            "modules": {},
+            "classes": {
+                "API.Semant": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/API/createOntology.js": {
+            "name": "src/API/createOntology.js",
             "modules": {},
             "classes": {},
+            "fors": {
+                "API.Semant": 1
+            },
+            "namespaces": {}
+        },
+        "src/CORE/Entity/Entity.js": {
+            "name": "src/CORE/Entity/Entity.js",
+            "modules": {},
+            "classes": {
+                "CORE.Entity": 1
+            },
             "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Exception/Exception.js": {
+            "name": "src/CORE/Exception/Exception.js",
+            "modules": {},
+            "classes": {
+                "CORE.Exception": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Exception/createEntityException.js": {
+            "name": "src/CORE/Exception/createEntityException.js",
+            "modules": {},
+            "classes": {
+                "CORE.Exception.createEntityException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Exception/createOntologyException.js": {
+            "name": "src/CORE/Exception/createOntologyException.js",
+            "modules": {},
+            "classes": {
+                "CORE.Exception.createOntologyException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Ontology/Ontology.js": {
+            "name": "src/CORE/Ontology/Ontology.js",
+            "modules": {},
+            "classes": {
+                "CORE.Ontology": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Ontology/createEntity.js": {
+            "name": "src/CORE/Ontology/createEntity.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Ontology": 1
+            },
             "namespaces": {}
         }
     },
     "modules": {},
-    "classes": {},
-    "classitems": [
-        {
-            "file": "src/API/createEntity.js",
+    "classes": {
+        "API.Semant": {
+            "name": "API.Semant",
+            "shortname": "API.Semant",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/API/Semant.js",
             "line": 1,
-            "description": "Creates an entity object and attaches it to semant object.",
-            "itemtype": "method",
-            "name": "createEntity",
+            "description": "Base class of the API.",
+            "static": 1
+        },
+        "CORE.Entity": {
+            "name": "CORE.Entity",
+            "shortname": "CORE.Entity",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Entity/Entity.js",
+            "line": 1,
+            "is_constructor": 1,
             "params": [
                 {
-                    "name": "Name",
-                    "description": "of the Entity.",
+                    "name": "name",
+                    "description": "Name of the entity",
+                    "type": "String"
+                }
+            ]
+        },
+        "CORE.Exception": {
+            "name": "CORE.Exception",
+            "shortname": "CORE.Exception",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Exception/Exception.js",
+            "line": 1,
+            "description": "Exception base class of SemantJS.",
+            "is_constructor": 1
+        },
+        "CORE.Exception.createEntityException": {
+            "name": "CORE.Exception.createEntityException",
+            "shortname": "CORE.Exception.createEntityException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Exception/createEntityException.js",
+            "line": 1,
+            "description": "Entity cannot be created exception",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Information on why the entity could not be created.",
+                    "type": "String"
+                }
+            ],
+            "extends": "CORE.Exception"
+        },
+        "CORE.Exception.createOntologyException": {
+            "name": "CORE.Exception.createOntologyException",
+            "shortname": "CORE.Exception.createOntologyException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Exception/createOntologyException.js",
+            "line": 1,
+            "description": "Ontology cannot be created exception",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Information on why the ontology could not be created.",
+                    "type": "String"
+                }
+            ],
+            "extends": "CORE.Exception"
+        },
+        "CORE.Ontology": {
+            "name": "CORE.Ontology",
+            "shortname": "CORE.Ontology",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Ontology/Ontology.js",
+            "line": 1,
+            "description": "General ontology that will contain all the entities, relationships and literals.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the Ontology.",
+                    "type": "String"
+                },
+                {
+                    "name": "domain",
+                    "description": "Domain of the Ontology.",
+                    "type": "String"
+                }
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/API/Semant.js",
+            "line": 11,
+            "description": "List of created ontologies",
+            "itemtype": "property",
+            "name": "ontologies",
+            "type": "Object",
+            "default": "{}",
+            "class": "API.Semant"
+        },
+        {
+            "file": "src/API/Semant.js",
+            "line": 18,
+            "description": "List of occupaid domains",
+            "itemtype": "property",
+            "name": "occupiedDomains",
+            "type": "Array",
+            "default": "[]",
+            "class": "API.Semant"
+        },
+        {
+            "file": "src/API/Semant.js",
+            "line": 28,
+            "description": "Change debug mode",
+            "itemtype": "method",
+            "name": "setDebug",
+            "params": [
+                {
+                    "name": "debug",
+                    "description": "Set global debug value to this.",
+                    "type": "Boolean"
+                }
+            ],
+            "example": [
+                "\n\tsemantics.setDebug(true);"
+            ],
+            "class": "API.Semant"
+        },
+        {
+            "file": "src/API/Semant.js",
+            "line": 38,
+            "description": "Get debug mode",
+            "itemtype": "method",
+            "name": "getDebug",
+            "return": {
+                "description": "Global debug value;",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n\tsemantics.getDebug();"
+            ],
+            "class": "API.Semant"
+        },
+        {
+            "file": "src/API/createOntology.js",
+            "line": 1,
+            "description": "Creates an ontology",
+            "itemtype": "method",
+            "name": "createOntology",
+            "throws": {
+                "description": "Cannot create ontology.",
+                "type": "CreateOntologyException"
+            },
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the ontology.",
+                    "type": "String"
+                },
+                {
+                    "name": "domain",
+                    "description": "Unique domain of the ontology.",
                     "type": "String"
                 }
             ],
             "return": {
-                "description": "Returns the created entity object.",
-                "type": "Object"
+                "description": "Returns the created Ontology object.",
+                "type": "Ontology"
             },
-            "class": ""
+            "example": [
+                "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");"
+            ],
+            "class": "API.Semant"
+        },
+        {
+            "file": "src/CORE/Exception/Exception.js",
+            "line": 11,
+            "itemtype": "property",
+            "name": "code",
+            "type": "Integer",
+            "default": "undefined",
+            "class": "CORE.Exception"
+        },
+        {
+            "file": "src/CORE/Exception/Exception.js",
+            "line": 17,
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "default": "undefined",
+            "class": "CORE.Exception"
+        },
+        {
+            "file": "src/CORE/Exception/Exception.js",
+            "line": 23,
+            "itemtype": "property",
+            "name": "notice",
+            "type": "String",
+            "default": "undefined",
+            "class": "CORE.Exception"
+        },
+        {
+            "file": "src/CORE/Exception/Exception.js",
+            "line": 29,
+            "itemtype": "property",
+            "name": "message",
+            "type": "String",
+            "default": "undefined",
+            "class": "CORE.Exception"
+        },
+        {
+            "file": "src/CORE/Exception/Exception.js",
+            "line": 37,
+            "itemtype": "method",
+            "name": "toString",
+            "return": {
+                "description": "Gives a basic description of the exception.",
+                "type": "String"
+            },
+            "class": "CORE.Exception"
+        },
+        {
+            "file": "src/CORE/Exception/Exception.js",
+            "line": 44,
+            "itemtype": "method",
+            "name": "details",
+            "return": {
+                "description": "Gives a detailed description of the exception.",
+                "type": "String"
+            },
+            "class": "CORE.Exception"
+        },
+        {
+            "file": "src/CORE/Ontology/Ontology.js",
+            "line": 13,
+            "description": "Name of the ontology",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "CORE.Ontology"
+        },
+        {
+            "file": "src/CORE/Ontology/Ontology.js",
+            "line": 19,
+            "description": "Domain of the ontology where all the URI's will be based on",
+            "itemtype": "property",
+            "name": "domain",
+            "type": "String",
+            "default": "undefined",
+            "class": "CORE.Ontology"
+        },
+        {
+            "file": "src/CORE/Ontology/Ontology.js",
+            "line": 26,
+            "itemtype": "property",
+            "name": "entityCollection",
+            "type": "Object {Entity name, Entity}",
+            "default": "{}",
+            "class": "CORE.Ontology"
+        },
+        {
+            "file": "src/CORE/Ontology/Ontology.js",
+            "line": 32,
+            "description": "Keeps every URI created under this ontology. Will be used for uniqueness check.",
+            "itemtype": "property",
+            "name": "occupiedURIs",
+            "type": "String Array",
+            "default": "[]",
+            "class": "CORE.Ontology"
+        },
+        {
+            "file": "src/CORE/Ontology/createEntity.js",
+            "line": 1,
+            "description": "Creates an entity object and attaches it to semant object.",
+            "itemtype": "method",
+            "name": "createEntity",
+            "throws": {
+                "description": "Cannot create entity.",
+                "type": "CreateEntityException"
+            },
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the Entity.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the created Entity object.",
+                "type": "Entity"
+            },
+            "example": [
+                "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");\n\tvar male = ont_people.createEntity(\"Male\");\n\tvar female = ont_people.createEntity(\"Femal\");;"
+            ],
+            "class": "CORE.Ontology"
         }
     ],
     "warnings": []

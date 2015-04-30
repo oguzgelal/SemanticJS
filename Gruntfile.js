@@ -28,7 +28,10 @@ module.exports = function(grunt) {
               'aggressiveOptimizations': false,
               'createAnonymousAMDModule': true,
               // Wrap library in an Immediately Invoked Function Expression (IIFE)
-              'wrap': {'start': ';(function(window, document, navigator, undefined) {\n', 'end': '\n}(typeof window !== "undefined" ? window : {}, typeof document !== "undefined" ? document : { createElement: function() {} }, typeof window !== "undefined" ? window.navigator : {}));' },
+              'wrap': {
+                'start': ';(function(window, document, navigator, undefined) {\nvar SEMANTICS={debug:true};\n',
+                'end': '\n}(typeof window !== "undefined" ? window : {}, typeof document !== "undefined" ? document : { createElement: function() {} }, typeof window !== "undefined" ? window.navigator : {}));'
+              },
               'escodegen': { 'comment': false }
             }));
           }
