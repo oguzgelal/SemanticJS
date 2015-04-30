@@ -24,7 +24,7 @@ define(function(){
 		this.occupiedDomains = [];
 	}
 
-	Semant.prototype.createOntology = require("API/createOntology");
+	Semant.prototype.createOntology = require("CORE/Ontology/createOntology");
 	/**
 	Change debug mode
 	@method setDebug

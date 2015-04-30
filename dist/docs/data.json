@@ -14,15 +14,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/API/createOntology.js": {
-            "name": "src/API/createOntology.js",
-            "modules": {},
-            "classes": {},
-            "fors": {
-                "API.Semant": 1
-            },
-            "namespaces": {}
-        },
         "src/CORE/Entity/Entity.js": {
             "name": "src/CORE/Entity/Entity.js",
             "modules": {},
@@ -30,6 +21,15 @@
                 "CORE.Entity": 1
             },
             "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Entity/createEntity.js": {
+            "name": "src/CORE/Entity/createEntity.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Ontology": 1
+            },
             "namespaces": {}
         },
         "src/CORE/Exception/Exception.js": {
@@ -68,12 +68,12 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/CORE/Ontology/createEntity.js": {
-            "name": "src/CORE/Ontology/createEntity.js",
+        "src/CORE/Ontology/createOntology.js": {
+            "name": "src/CORE/Ontology/createOntology.js",
             "modules": {},
             "classes": {},
             "fors": {
-                "CORE.Ontology": 1
+                "API.Semant": 1
             },
             "namespaces": {}
         }
@@ -108,6 +108,31 @@
                 {
                     "name": "name",
                     "description": "Name of the entity",
+                    "type": "String"
+                }
+            ]
+        },
+        "CORE.Ontology": {
+            "name": "CORE.Ontology",
+            "shortname": "CORE.Ontology",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Ontology/Ontology.js",
+            "line": 1,
+            "description": "General ontology that will contain all the entities, relationships and literals.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the Ontology.",
+                    "type": "String"
+                },
+                {
+                    "name": "domain",
+                    "description": "Domain of the Ontology.",
                     "type": "String"
                 }
             ]
@@ -166,31 +191,6 @@
                 }
             ],
             "extends": "CORE.Exception"
-        },
-        "CORE.Ontology": {
-            "name": "CORE.Ontology",
-            "shortname": "CORE.Ontology",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "file": "src/CORE/Ontology/Ontology.js",
-            "line": 1,
-            "description": "General ontology that will contain all the entities, relationships and literals.",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "name",
-                    "description": "Name of the Ontology.",
-                    "type": "String"
-                },
-                {
-                    "name": "domain",
-                    "description": "Domain of the Ontology.",
-                    "type": "String"
-                }
-            ]
         }
     },
     "classitems": [
@@ -248,35 +248,30 @@
             "class": "API.Semant"
         },
         {
-            "file": "src/API/createOntology.js",
+            "file": "src/CORE/Entity/createEntity.js",
             "line": 1,
-            "description": "Creates an ontology",
+            "description": "Creates an entity object and attaches it to semant object.",
             "itemtype": "method",
-            "name": "createOntology",
+            "name": "createEntity",
             "throws": {
-                "description": "Cannot create ontology.",
-                "type": "CreateOntologyException"
+                "description": "Cannot create entity.",
+                "type": "CreateEntityException"
             },
             "params": [
                 {
                     "name": "name",
-                    "description": "Name of the ontology.",
-                    "type": "String"
-                },
-                {
-                    "name": "domain",
-                    "description": "Unique domain of the ontology.",
+                    "description": "Name of the Entity.",
                     "type": "String"
                 }
             ],
             "return": {
-                "description": "Returns the created Ontology object.",
-                "type": "Ontology"
+                "description": "Returns the created Entity object.",
+                "type": "Entity"
             },
             "example": [
-                "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");"
+                "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");\n\tvar male = ont_people.createEntity(\"Male\");\n\tvar female = ont_people.createEntity(\"Femal\");;"
             ],
-            "class": "API.Semant"
+            "class": "CORE.Ontology"
         },
         {
             "file": "src/CORE/Exception/Exception.js",
@@ -375,30 +370,35 @@
             "class": "CORE.Ontology"
         },
         {
-            "file": "src/CORE/Ontology/createEntity.js",
+            "file": "src/CORE/Ontology/createOntology.js",
             "line": 1,
-            "description": "Creates an entity object and attaches it to semant object.",
+            "description": "Creates an ontology",
             "itemtype": "method",
-            "name": "createEntity",
+            "name": "createOntology",
             "throws": {
-                "description": "Cannot create entity.",
-                "type": "CreateEntityException"
+                "description": "Cannot create ontology.",
+                "type": "CreateOntologyException"
             },
             "params": [
                 {
                     "name": "name",
-                    "description": "Name of the Entity.",
+                    "description": "Name of the ontology.",
+                    "type": "String"
+                },
+                {
+                    "name": "domain",
+                    "description": "Unique domain of the ontology.",
                     "type": "String"
                 }
             ],
             "return": {
-                "description": "Returns the created Entity object.",
-                "type": "Entity"
+                "description": "Returns the created Ontology object.",
+                "type": "Ontology"
             },
             "example": [
-                "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");\n\tvar male = ont_people.createEntity(\"Male\");\n\tvar female = ont_people.createEntity(\"Femal\");;"
+                "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");"
             ],
-            "class": "CORE.Ontology"
+            "class": "API.Semant"
         }
     ],
     "warnings": []

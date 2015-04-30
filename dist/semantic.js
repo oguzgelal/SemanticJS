@@ -1,6 +1,6 @@
 ;(function(window, document, navigator, undefined) {
 var SEMANTICS={debug:true};
-var CORE_Entity_Entity, CORE_Exception_Exception, CORE_Exception_createEntityException, CORE_Ontology_createEntity, CORE_Ontology_Ontology, CORE_Exception_createOntologyException, API_createOntology, API_Semant;
+var CORE_Entity_Entity, CORE_Exception_Exception, CORE_Exception_createEntityException, CORE_Entity_createEntity, CORE_Ontology_Ontology, CORE_Exception_createOntologyException, CORE_Ontology_createOntology, API_Semant;
 CORE_Entity_Entity = function () {
   function Entity(name) {
     this.example = 'hey!';
@@ -36,7 +36,7 @@ CORE_Exception_createEntityException = function () {
   createEntityException.prototype = new Exception();
   return createEntityException;
 }();
-CORE_Ontology_createEntity = function () {
+CORE_Entity_createEntity = function () {
   var Entity = CORE_Entity_Entity;
   var createEntityException = CORE_Exception_createEntityException;
   var createEntity = function (name) {
@@ -70,7 +70,7 @@ CORE_Ontology_Ontology = function () {
     this.entityCollection = {};
     this.occupiedURIs = [];
   }
-  Ontology.prototype.createEntity = CORE_Ontology_createEntity;
+  Ontology.prototype.createEntity = CORE_Entity_createEntity;
   return Ontology;
 }();
 CORE_Exception_createOntologyException = function () {
@@ -87,7 +87,7 @@ CORE_Exception_createOntologyException = function () {
   createOntologyException.prototype = new Exception();
   return createOntologyException;
 }();
-API_createOntology = function () {
+CORE_Ontology_createOntology = function () {
   var Ontology = CORE_Ontology_Ontology;
   var createOntologyException = CORE_Exception_createOntologyException;
   var createOntology = function (name, domain) {
@@ -117,7 +117,7 @@ API_Semant = function () {
     this.ontologies = {};
     this.occupiedDomains = [];
   }
-  Semant.prototype.createOntology = API_createOntology;
+  Semant.prototype.createOntology = CORE_Ontology_createOntology;
   Semant.prototype.setDebug = function (debug) {
     if (typeof debug === 'boolean') {
       SEMANTICS.debug = debug;

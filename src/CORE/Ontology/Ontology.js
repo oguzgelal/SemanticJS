@@ -39,7 +39,7 @@ define(function(){
 		
 	}
 
-	Ontology.prototype.createEntity = require('CORE/Ontology/createEntity');
+	Ontology.prototype.createEntity = require('CORE/Entity/createEntity');
 
 	return Ontology;
 });
