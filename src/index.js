@@ -1,4 +1,4 @@
-require(['semant'], function(Semant) {
+require(['API/Semant'], function(Semant) {
   
   // Universal Module Definition (UMD) to support AMD,
   // CommonJS/Node.js, and plain browser loading

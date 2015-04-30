@@ -1,0 +1,40 @@
+{
+    "project": {
+        "name": "SemanticJS",
+        "description": "A free and open source Javascript library for building Semantic Web and Linked Data applications.",
+        "version": "1.0.0"
+    },
+    "files": {
+        "src/API/createEntity.js": {
+            "name": "src/API/createEntity.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {},
+    "classitems": [
+        {
+            "file": "src/API/createEntity.js",
+            "line": 1,
+            "description": "Creates an entity object and attaches it to semant object.",
+            "itemtype": "method",
+            "name": "createEntity",
+            "params": [
+                {
+                    "name": "Name",
+                    "description": "of the Entity.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the created entity object.",
+                "type": "Object"
+            },
+            "class": ""
+        }
+    ],
+    "warnings": []
+}
