@@ -20,7 +20,7 @@ Setup and Build
 --------
 The node_modules directory which contains all the third party plugins **(that are necessary for build process only, not included in the library)** is ignored. So after cloning the project, running `(sudo) npm install` is needed. After that, all you need to do is to run `grunt` command.
 
-All the building process is handled by Grunt. It compresses, optimizes and minifies all the modular javascript structure, and places in the `dist/` directory. The output of this complex and modular is only one lightweight file, **semantic.min.js** (or semantic.js which is the non-minified version).
+All the building process is handled by Grunt. It compresses, optimizes and minifies all the modular javascript structure, and places in the `dist/` directory. The output of library is only one lightweight file, **semantic.min.js** (or semantic.js which is the non-minified version).
 
 Usage
 --------
