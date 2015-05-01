@@ -25,7 +25,7 @@ All the building process is handled by Grunt. It compresses, optimizes and minif
 Usage
 --------
 
-Before creating any ontologies, you should initialising the `Semant` object.
+Before creating any ontologies, you should start with initialising the `Semant` object.
 
 ```Javascript
 var semantics = new Semant();
