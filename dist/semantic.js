@@ -1,6 +1,6 @@
 ;(function(window, document, navigator, undefined) {
 var SEMANTICS={debug:true};
-var CORE_Exception_Exception, CORE_Exception_createURIException, CORE_Utils_createURI, CORE_Utils_stripDomain, CORE_Utils_Utils, CORE_Exception_createEntityException, CORE_Entity_createSubEntity, CORE_Entity_Entity, CORE_Entity_createEntity, CORE_Ontology_Ontology, CORE_Exception_createOntologyException, CORE_Ontology_createOntology, API_Semant;
+var CORE_Exception_Exception, CORE_Exception_createURIException, CORE_Utils_createURI, CORE_Utils_stripDomain, CORE_Utils_Utils, CORE_Exception_createEntityException, CORE_Entity_createSubEntity, CORE_Exception_makeSubEntityException, CORE_Entity_makeSubEntity, CORE_Entity_Entity, CORE_Entity_createEntity, CORE_Ontology_Ontology, CORE_Exception_createOntologyException, CORE_Ontology_createOntology, API_Semant;
 CORE_Exception_Exception = function () {
   function Exception() {
     this.code = undefined;
@@ -19,7 +19,7 @@ CORE_Exception_Exception = function () {
 CORE_Exception_createURIException = function () {
   var Exception = CORE_Exception_Exception;
   function createURIException(message) {
-    this.code = 0;
+    this.code = 2;
     this.name = 'URI generation failed';
     this.notice = 'URI cannot be created.';
     this.message = message;
@@ -129,6 +129,37 @@ CORE_Entity_createSubEntity = function () {
   };
   return createSubEntity;
 }();
+CORE_Exception_makeSubEntityException = function () {
+  var Exception = CORE_Exception_Exception;
+  function makeSubEntityException(message) {
+    this.code = 3;
+    this.name = 'Make sub entity failed';
+    this.notice = 'Sub entity making failed.';
+    this.message = message;
+    if (SEMANTICS.debug) {
+      console.log(this.details());
+    }
+  }
+  makeSubEntityException.prototype = new Exception();
+  return makeSubEntityException;
+}();
+CORE_Entity_makeSubEntity = function () {
+  var makeSubEntity = function (parentEntity) {
+    var makeSubEntityException = CORE_Exception_makeSubEntityException;
+    if (typeof parentEntity !== 'object' || !parentEntity.type || parentEntity.type !== 'entity') {
+      throw new makeSubEntityException('The argument of makeSubEntity must be entity object.');
+    }
+    if (this.parent !== null) {
+      throw new makeSubEntityException('\'' + this.name + '\' Entity already has a parent');
+    }
+    parentEntity.subs[this.name] = this;
+    this.parent = parentEntity;
+    if (SEMANTICS.debug) {
+      console.log('Entity \'' + this.name + '\' is now a sub-entity of \'' + parentEntity.name + '\'.');
+    }
+  };
+  return makeSubEntity;
+}();
 CORE_Entity_Entity = function () {
   function Entity(name) {
     this.type = 'entity';
@@ -141,6 +172,7 @@ CORE_Entity_Entity = function () {
     this.ontology = null;
   }
   Entity.prototype.createSubEntity = CORE_Entity_createSubEntity;
+  Entity.prototype.makeSubEntity = CORE_Entity_makeSubEntity;
   return Entity;
 }();
 CORE_Entity_createEntity = function () {

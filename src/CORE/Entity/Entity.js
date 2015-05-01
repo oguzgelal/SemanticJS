@@ -67,6 +67,7 @@ define(function(){
 		this.ontology = null;
 	}
 	Entity.prototype.createSubEntity = require('CORE/Entity/createSubEntity');
+	Entity.prototype.makeSubEntity = require('CORE/Entity/makeSubEntity');
 
 	return Entity;
 });

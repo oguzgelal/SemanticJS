@@ -59,6 +59,17 @@ var male = human.createSubEntity("Male");
 var female = human.createSubEntity("Female");
 ```
 
+you can also use the `makeSubEntity` method to do the same thing. The code block above does exactly the same thing as this:
+
+```Javascript
+var alive = semantics.createOntology("Alive", "http://ppl.com");
+var human = alive.createEntity("Human");
+var male = alive.createEntity("Male");
+var female = alive.createEntity("Female");
+male.makeSubEntity(human);
+female.makeSubEntity(human);
+```
+
 As in Ontologies, every entity must have a **unique name** so that unique URI's could be created. If anything goes wrong, `createEntityException` will be thrown.
 
 Exceptions

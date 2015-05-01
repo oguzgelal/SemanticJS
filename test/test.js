@@ -12,8 +12,10 @@ $(document).ready(function(){
 	var ent_female = ent_human.createSubEntity("Female");
 
 	// animal
-	var ent_dog = ent_animal.createSubEntity("Dog");
-	var ent_cat = ent_animal.createSubEntity("Cat");
+	var ent_dog = ont_alive.createEntity("Dog");
+	var ent_cat = ont_alive.createEntity("Cat");
+	ent_dog.makeSubEntity(ent_animal);
+	ent_cat.makeSubEntity(ent_animal);
 
 
 	console.log("---------------------- Alive");
@@ -22,6 +24,10 @@ $(document).ready(function(){
 	console.log(ent_human);
 	console.log("---------------------- Male");
 	console.log(ent_male);
+	console.log("---------------------- Animal");
+	console.log(ent_animal);
+	console.log("---------------------- Dog");
+	console.log(ent_dog);
 	console.log("---------------------- Semantics");
 	console.log(semantics);
 

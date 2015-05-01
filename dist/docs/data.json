@@ -41,6 +41,15 @@
             },
             "namespaces": {}
         },
+        "src/CORE/Entity/makeSubEntity.js": {
+            "name": "src/CORE/Entity/makeSubEntity.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Entity": 1
+            },
+            "namespaces": {}
+        },
         "src/CORE/Exception/Exception.js": {
             "name": "src/CORE/Exception/Exception.js",
             "modules": {},
@@ -73,6 +82,15 @@
             "modules": {},
             "classes": {
                 "CORE.Exception.createURIException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Exception/makeSubEntityException.js": {
+            "name": "src/CORE/Exception/makeSubEntityException.js",
+            "modules": {},
+            "classes": {
+                "CORE.Exception.makeSubEntityException": 1
             },
             "fors": {},
             "namespaces": {}
@@ -253,6 +271,27 @@
                 {
                     "name": "message",
                     "description": "Information on why the URI could not be generated.",
+                    "type": "String"
+                }
+            ],
+            "extends": "CORE.Exception"
+        },
+        "CORE.Exception.makeSubEntityException": {
+            "name": "CORE.Exception.makeSubEntityException",
+            "shortname": "CORE.Exception.makeSubEntityException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Exception/makeSubEntityException.js",
+            "line": 1,
+            "description": "Make sub entity failed",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Information on why the entity could not be created.",
                     "type": "String"
                 }
             ],
@@ -449,6 +488,28 @@
             },
             "example": [
                 "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");\n\tvar male = ont_people.createEntity(\"Male\");\n\tvar female = ont_people.createEntity(\"Femal\");"
+            ],
+            "class": "CORE.Entity"
+        },
+        {
+            "file": "src/CORE/Entity/makeSubEntity.js",
+            "line": 1,
+            "description": "Makes an entity a sub entity of another.",
+            "itemtype": "event",
+            "name": "makeSubEntity",
+            "throws": {
+                "description": "Cannot make sub entity.",
+                "type": "MakeSubEntityException"
+            },
+            "params": [
+                {
+                    "name": "subent",
+                    "description": "Object of the soon-to-be sub entity",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n\tvar semantics = new Semant();\n\tvar alive = semantics.createOntology(\"Alive\", \"http://alive.com\");\n\tvar people = ont_people.createEntity(\"People\");\n\tvar male = ont_people.createEntity(\"Male\");\n\tvar female = ont_people.createEntity(\"Femal\");\n\tmale.makeSubEntity(people);\n\tfemale.makeSubEntity(people);\n\t// same as doing this:\n\t// people.createSubEntity(\"Male\");\n\t// people.createSubEntity(\"Female\");"
             ],
             "class": "CORE.Entity"
         },

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/CORE/Utils/Utils.js - SemanticJS</title>
+    <title>src/CORE/Exception/makeSubEntityException.js - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -83,25 +83,34 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/CORE/Utils/Utils.js</h1>
+<h1 class="file-heading">File: src/CORE/Exception/makeSubEntityException.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-Static class that contains the utilities.
+Make sub entity failed
 
-@class CORE.Utils
-@static
+@class CORE.Exception.makeSubEntityException
+@constructor
+@param {String} message Information on why the entity could not be created.
+@extends CORE.Exception
 */
 
 define(function(){
 	
-	var Utils = {
-		createURI: require(&#x27;CORE/Utils/createURI&#x27;),
-		stripDomain: require(&#x27;CORE/Utils/stripDomain&#x27;)
-	};
+	var Exception = require(&#x27;CORE/Exception/Exception&#x27;);
 
-	return Utils;
+	function makeSubEntityException(message){
+		this.code = 3;
+		this.name = &quot;Make sub entity failed&quot;;
+		this.notice = &quot;Sub entity making failed.&quot;;
+		this.message = message;
+		if (SEMANTICS.debug){ console.log(this.details()); }
+	}
+	// subclass.prototype = new baseclass();
+	makeSubEntityException.prototype = new Exception();
+
+	return makeSubEntityException;
 });
     </pre>
 </div>

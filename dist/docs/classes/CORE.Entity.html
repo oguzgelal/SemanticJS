@@ -44,6 +44,7 @@
                                 <li><a href="../classes/CORE.Exception.createEntityException.html">CORE.Exception.createEntityException</a></li>
                                 <li><a href="../classes/CORE.Exception.createOntologyException.html">CORE.Exception.createOntologyException</a></li>
                                 <li><a href="../classes/CORE.Exception.createURIException.html">CORE.Exception.createURIException</a></li>
+                                <li><a href="../classes/CORE.Exception.makeSubEntityException.html">CORE.Exception.makeSubEntityException</a></li>
                                 <li><a href="../classes/CORE.Ontology.html">CORE.Ontology</a></li>
                                 <li><a href="../classes/CORE.Utils.html">CORE.Utils</a></li>
                             </ul>
@@ -161,6 +162,7 @@
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
     </ul>
 
     <div>
@@ -218,6 +220,16 @@
                 </div>
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                            <li class="index-item event">
+                                <a href="#event_makeSubEntity">makeSubEntity</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
             <div id="methods" class="api-class-tabpanel">
@@ -525,6 +537,69 @@ var female = ont_people.createEntity(&quot;Femal&quot;);
             </div>
 
 
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_makeSubEntity" class="events item">
+                        <h3 class="name"><code>makeSubEntity</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_CORE_Entity_makeSubEntity.js.html#l1"><code>src&#x2F;CORE&#x2F;Entity&#x2F;makeSubEntity.js:1</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Makes an entity a sub entity of another.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">subent</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>Object of the soon-to-be sub entity</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <pre class="code prettyprint"><code>var semantics = new Semant();
+                    var alive = semantics.createOntology(&quot;Alive&quot;, &quot;http://alive.com&quot;);
+                    var people = ont_people.createEntity(&quot;People&quot;);
+                    var male = ont_people.createEntity(&quot;Male&quot;);
+                    var female = ont_people.createEntity(&quot;Femal&quot;);
+                    male.makeSubEntity(people);
+                    female.makeSubEntity(people);
+                    // same as doing this:
+                    // people.createSubEntity(&quot;Male&quot;);
+                    // people.createSubEntity(&quot;Female&quot;);
+                    </code></pre>
+                                </div>
+                            </div>
+                    </div>
+            </div>
     </div>
 </div>
                     </div>

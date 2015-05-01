@@ -12,7 +12,7 @@ define(function(){
 	var Exception = require('CORE/Exception/Exception');
 
 	function createURIException(message){
-		this.code = 0;
+		this.code = 2;
 		this.name = "URI generation failed";
 		this.notice = "URI cannot be created.";
 		this.message = message;
