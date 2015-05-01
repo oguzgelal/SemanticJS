@@ -50,6 +50,15 @@ var male = people.createEntity("Male");
 var female = people.createEntity("Female");
 ```
 
+or another way to create entities are calling the `createSubEntity` method. This method is equivalent to `createEntity`, but it is not called from an ontology, it is called directly from an entity. Another difference is that it sets some fields of the entity in such a way that the newly created entity becomes the sub-entity of the entity in context.
+
+```Javascript
+var alive = semantics.createOntology("Alive", "http://ppl.com");
+var human = alive.createEntity("Human");
+var male = human.createSubEntity("Male");
+var female = human.createSubEntity("Female");
+```
+
 As in Ontologies, every entity must have a **unique name** so that unique URI's could be created. If anything goes wrong, `createEntityException` will be thrown.
 
 Exceptions
