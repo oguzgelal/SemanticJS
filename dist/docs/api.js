@@ -6,7 +6,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "CORE.Exception",
         "CORE.Exception.createEntityException",
         "CORE.Exception.createOntologyException",
-        "CORE.Ontology"
+        "CORE.Exception.createURIException",
+        "CORE.Ontology",
+        "CORE.Utils"
     ],
     "modules": [],
     "allModules": []

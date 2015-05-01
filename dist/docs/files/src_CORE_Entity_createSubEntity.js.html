@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/CORE/Exception/createOntologyException.js - SemanticJS</title>
+    <title>src/CORE/Entity/createSubEntity.js - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -82,35 +82,60 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/CORE/Exception/createOntologyException.js</h1>
+<h1 class="file-heading">File: src/CORE/Entity/createSubEntity.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-Ontology cannot be created exception
+Creates an entity. Called from another entity object.
 
-@class CORE.Exception.createOntologyException
-@constructor
-@param {String} message Information on why the ontology could not be created.
-@extends CORE.Exception
-*/
+@method createSubEntity
+@for CORE.Entity
+@throws {createEntityException} Cannot create entity.
+@param {String} name Name of the Entity.
+@return {Entity} Returns the created Entity object.
+@example
+	var semantics = new Semant();
+	var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&quot;);
+	var male = ont_people.createEntity(&quot;Male&quot;);
+	var female = ont_people.createEntity(&quot;Femal&quot;);
+	*/
 
-define(function(){
-	
-	var Exception = require(&#x27;CORE/Exception/Exception&#x27;);
+	define(function(){
 
-	function createOntologyException(message){
-		this.code = 1;
-		this.name = &quot;Create ontology failed&quot;;
-		this.notice = &quot;Ontology cannot be created&quot;;
-		this.message = message;
-		if (SEMANTICS.debug){ console.log(this.details()); }
-	}
-	// subclass.prototype = new baseclass();
-	createOntologyException.prototype = new Exception();
+		var createSubEntity = function(name){
+			var Entity = require(&#x27;CORE/Entity/Entity&#x27;);
+			var Utils = require(&#x27;CORE/Utils/Utils&#x27;);
+			var createEntityException = require(&#x27;CORE/Exception/createEntityException&#x27;);
 
-	return createOntologyException;
-});
+			// The name should be string
+			if (typeof name !== &#x27;string&#x27;){ throw new createEntityException(&quot;Argument of &#x27;createEntity&#x27; must be of type &#x27;String&#x27; and indicate the name of the entity.&quot;); }
+			// Cannot be blank
+			if (!name || (name &amp;&amp; name.length === 0)){ throw new createEntityException(&quot;Argument of &#x27;createEntity&#x27; is blank or empty.&quot;); }
+			
+			var URI = Utils.createURI(name, this.ontology.domain, &#x27;entity&#x27;);
+			if (this.ontology.occupiedURIs.indexOf(URI)!=-1){
+				throw new createEntityException(&quot;An entity with the same name already exists.&quot;);
+			}
+			else{
+				this.ontology.occupiedURIs.push(URI);
+
+				var entity = new Entity(name);
+				// set the parent of the sub entity to current entity.
+				entity.parent = this;
+				// pass the context of the current entity to the sub entity being created.
+				entity.ontology = this.ontology;
+				// add the sub entity to the subs list of the current entity.
+				this.subs[name] = entity;
+				this.ontology.entityCollection[name] = entity;
+				if (SEMANTICS.debug){ console.log(&quot;Entity &#x27;&quot;+name+&quot;&#x27; created under the entity &#x27;&quot;+this.name+&quot;&#x27;.&quot;); }
+				return entity;
+			}
+			
+		};
+
+		return createSubEntity;
+	});
     </pre>
 </div>
                     </div>

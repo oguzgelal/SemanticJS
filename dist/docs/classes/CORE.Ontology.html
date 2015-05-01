@@ -43,7 +43,9 @@
                                 <li><a href="../classes/CORE.Exception.html">CORE.Exception</a></li>
                                 <li><a href="../classes/CORE.Exception.createEntityException.html">CORE.Exception.createEntityException</a></li>
                                 <li><a href="../classes/CORE.Exception.createOntologyException.html">CORE.Exception.createOntologyException</a></li>
+                                <li><a href="../classes/CORE.Exception.createURIException.html">CORE.Exception.createURIException</a></li>
                                 <li><a href="../classes/CORE.Ontology.html">CORE.Ontology</a></li>
+                                <li><a href="../classes/CORE.Utils.html">CORE.Utils</a></li>
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
@@ -211,6 +213,10 @@
                                 <a href="#property_occupiedURIs">occupiedURIs</a>
 
                             </li>
+                            <li class="index-item property">
+                                <a href="#property_type">type</a>
+
+                            </li>
                     </ul>
                 </div>
 
@@ -252,7 +258,7 @@
     </div>
 
     <div class="description">
-        <p>Creates an entity object and attaches it to semant object.</p>
+        <p>Creates an entity. Called from the Ontology object.</p>
 
     </div>
 
@@ -301,7 +307,7 @@
                 <pre class="code prettyprint"><code>var semantics = new Semant();
 var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&quot;);
 var male = ont_people.createEntity(&quot;Male&quot;);
-var female = ont_people.createEntity(&quot;Femal&quot;);;
+var female = ont_people.createEntity(&quot;Femal&quot;);
 </code></pre>
             </div>
         </div>
@@ -322,7 +328,7 @@ var female = ont_people.createEntity(&quot;Femal&quot;);;
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_CORE_Ontology_Ontology.js.html#l19"><code>src&#x2F;CORE&#x2F;Ontology&#x2F;Ontology.js:19</code></a>
+                            <a href="../files/src_CORE_Ontology_Ontology.js.html#l25"><code>src&#x2F;CORE&#x2F;Ontology&#x2F;Ontology.js:25</code></a>
                             </p>
                     
                     
@@ -348,7 +354,7 @@ var female = ont_people.createEntity(&quot;Femal&quot;);;
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_CORE_Ontology_Ontology.js.html#l26"><code>src&#x2F;CORE&#x2F;Ontology&#x2F;Ontology.js:26</code></a>
+                            <a href="../files/src_CORE_Ontology_Ontology.js.html#l32"><code>src&#x2F;CORE&#x2F;Ontology&#x2F;Ontology.js:32</code></a>
                             </p>
                     
                     
@@ -373,7 +379,7 @@ var female = ont_people.createEntity(&quot;Femal&quot;);;
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_CORE_Ontology_Ontology.js.html#l13"><code>src&#x2F;CORE&#x2F;Ontology&#x2F;Ontology.js:13</code></a>
+                            <a href="../files/src_CORE_Ontology_Ontology.js.html#l19"><code>src&#x2F;CORE&#x2F;Ontology&#x2F;Ontology.js:19</code></a>
                             </p>
                     
                     
@@ -398,7 +404,7 @@ var female = ont_people.createEntity(&quot;Femal&quot;);;
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_CORE_Ontology_Ontology.js.html#l32"><code>src&#x2F;CORE&#x2F;Ontology&#x2F;Ontology.js:32</code></a>
+                            <a href="../files/src_CORE_Ontology_Ontology.js.html#l38"><code>src&#x2F;CORE&#x2F;Ontology&#x2F;Ontology.js:38</code></a>
                             </p>
                     
                     
@@ -410,6 +416,31 @@ var female = ont_people.createEntity(&quot;Femal&quot;);;
                         </div>
                     
                             <p><strong>Default:</strong> []</p>
+                    
+                    
+                    </div>
+                    <div id="property_type" class="property item">
+                        <h3 class="name"><code>type</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_CORE_Ontology_Ontology.js.html#l13"><code>src&#x2F;CORE&#x2F;Ontology&#x2F;Ontology.js:13</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>For identifying an instance</p>
+                    
+                        </div>
+                    
                     
                     
                     </div>

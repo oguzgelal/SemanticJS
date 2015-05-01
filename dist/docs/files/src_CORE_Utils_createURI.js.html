@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/CORE/Exception/createOntologyException.js - SemanticJS</title>
+    <title>src/CORE/Utils/createURI.js - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -82,35 +82,45 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/CORE/Exception/createOntologyException.js</h1>
+<h1 class="file-heading">File: src/CORE/Utils/createURI.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-Ontology cannot be created exception
+Generates URI for objects.
 
-@class CORE.Exception.createOntologyException
-@constructor
-@param {String} message Information on why the ontology could not be created.
-@extends CORE.Exception
-*/
+@method createURI
+@for CORE.Utils
+@param {String} name Name of the item which the URI will be created.
+@param {String} domain Under what domain the URI will be created
+@param {String} path The type of item.
+@example
+	console.log(createURI(&quot;People&quot;, &quot;http://abc.com&quot;, &quot;ontology&quot;)); //will output - http://abc.com/ontology/People
+	*/
 
-define(function(){
-	
-	var Exception = require(&#x27;CORE/Exception/Exception&#x27;);
+	define(function(){
 
-	function createOntologyException(message){
-		this.code = 1;
-		this.name = &quot;Create ontology failed&quot;;
-		this.notice = &quot;Ontology cannot be created&quot;;
-		this.message = message;
-		if (SEMANTICS.debug){ console.log(this.details()); }
-	}
-	// subclass.prototype = new baseclass();
-	createOntologyException.prototype = new Exception();
+		var createURI = function(name, domain, path){
+			var createURIException = require(&#x27;CORE/Exception/createURIException&#x27;);
+			
+			// type checks
+			if (typeof name !== &quot;string&quot;){ throw new createURIException(&quot;The name parameter should be of type string.&quot;); }
+			if (typeof domain !== &quot;string&quot;){ throw new createURIException(&quot;The domain parameter should be of type string.&quot;); }
+			if (typeof path !== &quot;string&quot;){ throw new createURIException(&quot;The path parameter should be of type string.&quot;); }
+			if (!name || (name &amp;&amp; name.length === 0)){ throw new createURIException(&quot;Name parameter not present or empty.&quot;); }
+			if (!domain || (domain &amp;&amp; domain.length === 0)){ throw new createURIException(&quot;Domain parameter not present or empty.&quot;); }
+			if (!path || (path &amp;&amp; path.length === 0)){ throw new createURIException(&quot;Path parameter not present or empty.&quot;); }
+			// strip slashes
+			if (domain.substring(domain.length-1, domain.length) === &#x27;/&#x27;){ domain = domain.substring(0, domain.length-1); }
+			if (path.substring(path.length-1, path.length) === &#x27;/&#x27;){ path = path.substring(0, path.length-1); }
+			if (path.substring(0, 1) === &#x27;/&#x27;){  path = path.substring(1, path.length); }
+			// if domain prefix not present, add http:// 
+			if (!domain.match(/(\w)*:\/\//gi)){ domain = &quot;http://&quot;+domain; }
+			return domain+&quot;/&quot;+path+&quot;/&quot;+name;
+		};
 
-	return createOntologyException;
-});
+		return createURI;
+	});
     </pre>
 </div>
                     </div>

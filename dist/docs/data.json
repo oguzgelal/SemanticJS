@@ -32,6 +32,15 @@
             },
             "namespaces": {}
         },
+        "src/CORE/Entity/createSubEntity.js": {
+            "name": "src/CORE/Entity/createSubEntity.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Entity": 1
+            },
+            "namespaces": {}
+        },
         "src/CORE/Exception/Exception.js": {
             "name": "src/CORE/Exception/Exception.js",
             "modules": {},
@@ -59,6 +68,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/CORE/Exception/createURIException.js": {
+            "name": "src/CORE/Exception/createURIException.js",
+            "modules": {},
+            "classes": {
+                "CORE.Exception.createURIException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/CORE/Ontology/Ontology.js": {
             "name": "src/CORE/Ontology/Ontology.js",
             "modules": {},
@@ -74,6 +92,33 @@
             "classes": {},
             "fors": {
                 "API.Semant": 1
+            },
+            "namespaces": {}
+        },
+        "src/CORE/Utils/Utils.js": {
+            "name": "src/CORE/Utils/Utils.js",
+            "modules": {},
+            "classes": {
+                "CORE.Utils": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Utils/createURI.js": {
+            "name": "src/CORE/Utils/createURI.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Utils": 1
+            },
+            "namespaces": {}
+        },
+        "src/CORE/Utils/stripDomain.js": {
+            "name": "src/CORE/Utils/stripDomain.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Utils": 1
             },
             "namespaces": {}
         }
@@ -191,6 +236,40 @@
                 }
             ],
             "extends": "CORE.Exception"
+        },
+        "CORE.Exception.createURIException": {
+            "name": "CORE.Exception.createURIException",
+            "shortname": "CORE.Exception.createURIException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Exception/createURIException.js",
+            "line": 1,
+            "description": "URI cannot be generated",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Information on why the URI could not be generated.",
+                    "type": "String"
+                }
+            ],
+            "extends": "CORE.Exception"
+        },
+        "CORE.Utils": {
+            "name": "CORE.Utils",
+            "shortname": "CORE.Utils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Utils/Utils.js",
+            "line": 1,
+            "description": "Static class that contains the utilities.",
+            "static": 1
         }
     },
     "classitems": [
@@ -248,9 +327,83 @@
             "class": "API.Semant"
         },
         {
+            "file": "src/CORE/Entity/Entity.js",
+            "line": 10,
+            "description": "For identifying an instance",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "class": "CORE.Entity"
+        },
+        {
+            "file": "src/CORE/Entity/Entity.js",
+            "line": 16,
+            "description": "Name of the entity",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "CORE.Entity"
+        },
+        {
+            "file": "src/CORE/Entity/Entity.js",
+            "line": 22,
+            "description": "The relationships where this entity is the domain. What this variable\nstores is {relationship, entity} or {relationship, literal}. For example\nin a relationship like Istanbul -in-> Turkey, the Istanbul entity would\nstore this this relationship in relOut as {in, Turkey}",
+            "itemtype": "property",
+            "name": "relOut",
+            "type": "Object",
+            "default": "{}",
+            "class": "CORE.Entity"
+        },
+        {
+            "file": "src/CORE/Entity/Entity.js",
+            "line": 33,
+            "description": "The relationships where this entity is the range. What this variable\nstores is {relationship, entity}. For example\nin a relationship like Istanbul -in-> Turkey, the instance Turkey would\nstore this this relationship in relIn as {in, Istanbul}",
+            "itemtype": "property",
+            "name": "relIn",
+            "type": "Object",
+            "default": "{}",
+            "class": "CORE.Entity"
+        },
+        {
+            "file": "src/CORE/Entity/Entity.js",
+            "line": 44,
+            "description": "Individuals of this entity",
+            "itemtype": "property",
+            "name": "individuals",
+            "type": "Object",
+            "class": "CORE.Entity"
+        },
+        {
+            "file": "src/CORE/Entity/Entity.js",
+            "line": 50,
+            "description": "Sub entities.",
+            "itemtype": "property",
+            "name": "subs",
+            "type": "Object",
+            "class": "CORE.Entity"
+        },
+        {
+            "file": "src/CORE/Entity/Entity.js",
+            "line": 56,
+            "description": "Parent entity.",
+            "itemtype": "property",
+            "name": "parent",
+            "type": "Object",
+            "class": "CORE.Entity"
+        },
+        {
+            "file": "src/CORE/Entity/Entity.js",
+            "line": 62,
+            "description": "The ontology this entity is created under",
+            "itemtype": "property",
+            "name": "ontology",
+            "type": "Object",
+            "class": "CORE.Entity"
+        },
+        {
             "file": "src/CORE/Entity/createEntity.js",
             "line": 1,
-            "description": "Creates an entity object and attaches it to semant object.",
+            "description": "Creates an entity. Called from the Ontology object.",
             "itemtype": "method",
             "name": "createEntity",
             "throws": {
@@ -269,9 +422,35 @@
                 "type": "Entity"
             },
             "example": [
-                "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");\n\tvar male = ont_people.createEntity(\"Male\");\n\tvar female = ont_people.createEntity(\"Femal\");;"
+                "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");\n\tvar male = ont_people.createEntity(\"Male\");\n\tvar female = ont_people.createEntity(\"Femal\");"
             ],
             "class": "CORE.Ontology"
+        },
+        {
+            "file": "src/CORE/Entity/createSubEntity.js",
+            "line": 1,
+            "description": "Creates an entity. Called from another entity object.",
+            "itemtype": "method",
+            "name": "createSubEntity",
+            "throws": {
+                "description": "Cannot create entity.",
+                "type": "CreateEntityException"
+            },
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the Entity.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the created Entity object.",
+                "type": "Entity"
+            },
+            "example": [
+                "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");\n\tvar male = ont_people.createEntity(\"Male\");\n\tvar female = ont_people.createEntity(\"Femal\");"
+            ],
+            "class": "CORE.Entity"
         },
         {
             "file": "src/CORE/Exception/Exception.js",
@@ -334,6 +513,15 @@
         {
             "file": "src/CORE/Ontology/Ontology.js",
             "line": 13,
+            "description": "For identifying an instance",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "class": "CORE.Ontology"
+        },
+        {
+            "file": "src/CORE/Ontology/Ontology.js",
+            "line": 19,
             "description": "Name of the ontology",
             "itemtype": "property",
             "name": "name",
@@ -342,7 +530,7 @@
         },
         {
             "file": "src/CORE/Ontology/Ontology.js",
-            "line": 19,
+            "line": 25,
             "description": "Domain of the ontology where all the URI's will be based on",
             "itemtype": "property",
             "name": "domain",
@@ -352,7 +540,7 @@
         },
         {
             "file": "src/CORE/Ontology/Ontology.js",
-            "line": 26,
+            "line": 32,
             "itemtype": "property",
             "name": "entityCollection",
             "type": "Object {Entity name, Entity}",
@@ -361,7 +549,7 @@
         },
         {
             "file": "src/CORE/Ontology/Ontology.js",
-            "line": 32,
+            "line": 38,
             "description": "Keeps every URI created under this ontology. Will be used for uniqueness check.",
             "itemtype": "property",
             "name": "occupiedURIs",
@@ -399,6 +587,49 @@
                 "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");"
             ],
             "class": "API.Semant"
+        },
+        {
+            "file": "src/CORE/Utils/createURI.js",
+            "line": 1,
+            "description": "Generates URI for objects.",
+            "itemtype": "method",
+            "name": "createURI",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the item which the URI will be created.",
+                    "type": "String"
+                },
+                {
+                    "name": "domain",
+                    "description": "Under what domain the URI will be created",
+                    "type": "String"
+                },
+                {
+                    "name": "path",
+                    "description": "The type of item.",
+                    "type": "String"
+                }
+            ],
+            "example": [
+                "\n\tconsole.log(createURI(\"People\", \"http://abc.com\", \"ontology\")); //will output - http://abc.com/ontology/People"
+            ],
+            "class": "CORE.Utils"
+        },
+        {
+            "file": "src/CORE/Utils/stripDomain.js",
+            "line": 1,
+            "description": "Converts the domain into the desired form",
+            "itemtype": "method",
+            "name": "stripDomain",
+            "params": [
+                {
+                    "name": "domain",
+                    "description": "Domain to be converted.",
+                    "type": "String"
+                }
+            ],
+            "class": "CORE.Utils"
         }
     ],
     "warnings": []

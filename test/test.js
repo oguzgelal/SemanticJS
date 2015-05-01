@@ -3,26 +3,26 @@ $(document).ready(function(){
 	var semantics = new Semant();
 	semantics.setDebug(true); // already defaults to true
 
-	var ont_people = semantics.createOntology("People", "http://ppl.com");
-	var male_ent = ont_people.createEntity("Male");
-	var female_ent = ont_people.createEntity("Femal");
-	console.log(ont_people);
-	console.log(male_ent);
-	console.log(female_ent);
+	var ont_alive = semantics.createOntology("Alive", "ppl.com");
+	var ent_human = ont_alive.createEntity("Human");
+	var ent_animal = ont_alive.createEntity("Animal");
 
-	console.log("----------------------");
+	//human
+	var ent_male = ent_human.createSubEntity("Male");
+	var ent_female = ent_human.createSubEntity("Female");
 
-	var ont_animals = semantics.createOntology("Animals", "http://anms.com");
-	var cat_ent = ont_animals.createEntity("Cat");
-	var dog_ent = ont_animals.createEntity("Dog");
-	var bird_ent = ont_animals.createEntity("Bird");
-	console.log(ont_animals);
-	console.log(cat_ent);
-	console.log(dog_ent);
-	console.log(bird_ent);
+	// animal
+	var ent_dog = ent_animal.createSubEntity("Dog");
+	var ent_cat = ent_animal.createSubEntity("Cat");
 
-	console.log("----------------------");
 
+	console.log("---------------------- Alive");
+	console.log(ont_alive);
+	console.log("---------------------- Human");
+	console.log(ent_human);
+	console.log("---------------------- Male");
+	console.log(ent_male);
+	console.log("---------------------- Semantics");
 	console.log(semantics);
 
 });

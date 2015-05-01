@@ -11,6 +11,12 @@ define(function(){
 
 	function Ontology(name, domain){
 		/**
+		For identifying an instance
+		@property type
+		@type String
+		*/
+		this.type = "ontology";
+		/**
 		Name of the ontology
 		@property name
 		@type String

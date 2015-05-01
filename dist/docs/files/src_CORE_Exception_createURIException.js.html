@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/CORE/Exception/createOntologyException.js - SemanticJS</title>
+    <title>src/CORE/Exception/createURIException.js - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -82,16 +82,16 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/CORE/Exception/createOntologyException.js</h1>
+<h1 class="file-heading">File: src/CORE/Exception/createURIException.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-Ontology cannot be created exception
+URI cannot be generated
 
-@class CORE.Exception.createOntologyException
+@class CORE.Exception.createURIException
 @constructor
-@param {String} message Information on why the ontology could not be created.
+@param {String} message Information on why the URI could not be generated.
 @extends CORE.Exception
 */
 
@@ -99,17 +99,17 @@ define(function(){
 	
 	var Exception = require(&#x27;CORE/Exception/Exception&#x27;);
 
-	function createOntologyException(message){
-		this.code = 1;
-		this.name = &quot;Create ontology failed&quot;;
-		this.notice = &quot;Ontology cannot be created&quot;;
+	function createURIException(message){
+		this.code = 0;
+		this.name = &quot;URI generation failed&quot;;
+		this.notice = &quot;URI cannot be created.&quot;;
 		this.message = message;
 		if (SEMANTICS.debug){ console.log(this.details()); }
 	}
 	// subclass.prototype = new baseclass();
-	createOntologyException.prototype = new Exception();
+	createURIException.prototype = new Exception();
 
-	return createOntologyException;
+	return createURIException;
 });
     </pre>
 </div>

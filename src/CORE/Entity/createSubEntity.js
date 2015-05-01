@@ -1,8 +1,8 @@
 /**
-Creates an entity. Called from the Ontology object.
+Creates an entity. Called from another entity object.
 
-@method createEntity
-@for CORE.Ontology
+@method createSubEntity
+@for CORE.Entity
 @throws {createEntityException} Cannot create entity.
 @param {String} name Name of the Entity.
 @return {Entity} Returns the created Entity object.
@@ -15,7 +15,7 @@ Creates an entity. Called from the Ontology object.
 
 	define(function(){
 
-		var createEntity = function(name){
+		var createSubEntity = function(name){
 			var Entity = require('CORE/Entity/Entity');
 			var Utils = require('CORE/Utils/Utils');
 			var createEntityException = require('CORE/Exception/createEntityException');
@@ -24,26 +24,27 @@ Creates an entity. Called from the Ontology object.
 			if (typeof name !== 'string'){ throw new createEntityException("Argument of 'createEntity' must be of type 'String' and indicate the name of the entity."); }
 			// Cannot be blank
 			if (!name || (name && name.length === 0)){ throw new createEntityException("Argument of 'createEntity' is blank or empty."); }
-			// Unique name should be created for the Ontology object.
-			if (!this.name){ throw new createEntityException("Unique name of the ontology should be set before creating any entities."); }
-			// Unique domain should be created for the Ontology object.
-			if (!this.domain){ throw new createEntityException("Unique domain of the ontology should be set before creating any entities."); }
 			
-			var URI = Utils.createURI(name, this.domain, 'entity');
-			if (this.occupiedURIs.indexOf(URI)!=-1){
+			var URI = Utils.createURI(name, this.ontology.domain, 'entity');
+			if (this.ontology.occupiedURIs.indexOf(URI)!=-1){
 				throw new createEntityException("An entity with the same name already exists.");
 			}
 			else{
-				this.occupiedURIs.push(URI);
+				this.ontology.occupiedURIs.push(URI);
+
 				var entity = new Entity(name);
-				// determine the context ontology of the entity
-				entity.ontology = this;
-				this.entityCollection[name] = entity;
-				if (SEMANTICS.debug){ console.log("Entity '"+name+"' created."); }
+				// set the parent of the sub entity to current entity.
+				entity.parent = this;
+				// pass the context of the current entity to the sub entity being created.
+				entity.ontology = this.ontology;
+				// add the sub entity to the subs list of the current entity.
+				this.subs[name] = entity;
+				this.ontology.entityCollection[name] = entity;
+				if (SEMANTICS.debug){ console.log("Entity '"+name+"' created under the entity '"+this.name+"'."); }
 				return entity;
 			}
 			
 		};
 
-		return createEntity;
+		return createSubEntity;
 	});

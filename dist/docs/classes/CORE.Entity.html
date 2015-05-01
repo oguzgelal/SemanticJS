@@ -43,7 +43,9 @@
                                 <li><a href="../classes/CORE.Exception.html">CORE.Exception</a></li>
                                 <li><a href="../classes/CORE.Exception.createEntityException.html">CORE.Exception.createEntityException</a></li>
                                 <li><a href="../classes/CORE.Exception.createOntologyException.html">CORE.Exception.createOntologyException</a></li>
+                                <li><a href="../classes/CORE.Exception.createURIException.html">CORE.Exception.createURIException</a></li>
                                 <li><a href="../classes/CORE.Ontology.html">CORE.Ontology</a></li>
+                                <li><a href="../classes/CORE.Utils.html">CORE.Utils</a></li>
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
@@ -157,18 +159,370 @@
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
     </ul>
 
     <div>
         <div id="index" class="api-class-tabpanel index">
             <h2 class="off-left">Item Index</h2>
 
+                <div class="index-section methods">
+                    <h3>Methods</h3>
 
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_createSubEntity">createSubEntity</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property">
+                                <a href="#property_individuals">individuals</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_name">name</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_ontology">ontology</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_parent">parent</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_relIn">relIn</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_relOut">relOut</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_subs">subs</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_type">type</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
         </div>
 
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
 
+<div id="method_createSubEntity" class="method item">
+    <h3 class="name"><code>createSubEntity</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Entity</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_CORE_Entity_createSubEntity.js.html#l1"><code>src&#x2F;CORE&#x2F;Entity&#x2F;createSubEntity.js:1</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Creates an entity. Called from another entity object.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Name of the Entity.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Entity</span>:
+                    <p>Returns the created Entity object.</p>
+
+            </div>
+        </div>
+
+        <div class="throws">
+            <h4>Throws:</h4>
+
+            <div class="throws-description">
+                        <span class="type">CreateEntityException</span>:
+                    <p>Cannot create entity.</p>
+
+            </div>
+        </div>
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var semantics = new Semant();
+var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&quot;);
+var male = ont_people.createEntity(&quot;Male&quot;);
+var female = ont_people.createEntity(&quot;Femal&quot;);
+</code></pre>
+            </div>
+        </div>
+</div>
+            </div>
+
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                    <div id="property_individuals" class="property item">
+                        <h3 class="name"><code>individuals</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_CORE_Entity_Entity.js.html#l44"><code>src&#x2F;CORE&#x2F;Entity&#x2F;Entity.js:44</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Individuals of this entity</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_name" class="property item">
+                        <h3 class="name"><code>name</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_CORE_Entity_Entity.js.html#l16"><code>src&#x2F;CORE&#x2F;Entity&#x2F;Entity.js:16</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Name of the entity</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_ontology" class="property item">
+                        <h3 class="name"><code>ontology</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_CORE_Entity_Entity.js.html#l62"><code>src&#x2F;CORE&#x2F;Entity&#x2F;Entity.js:62</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The ontology this entity is created under</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_parent" class="property item">
+                        <h3 class="name"><code>parent</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_CORE_Entity_Entity.js.html#l56"><code>src&#x2F;CORE&#x2F;Entity&#x2F;Entity.js:56</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Parent entity.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_relIn" class="property item">
+                        <h3 class="name"><code>relIn</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_CORE_Entity_Entity.js.html#l33"><code>src&#x2F;CORE&#x2F;Entity&#x2F;Entity.js:33</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The relationships where this entity is the range. What this variable
+                    stores is {relationship, entity}. For example
+                    in a relationship like Istanbul -in-&gt; Turkey, the instance Turkey would
+                    store this this relationship in relIn as {in, Istanbul}</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> {}</p>
+                    
+                    
+                    </div>
+                    <div id="property_relOut" class="property item">
+                        <h3 class="name"><code>relOut</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_CORE_Entity_Entity.js.html#l22"><code>src&#x2F;CORE&#x2F;Entity&#x2F;Entity.js:22</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The relationships where this entity is the domain. What this variable
+                    stores is {relationship, entity} or {relationship, literal}. For example
+                    in a relationship like Istanbul -in-&gt; Turkey, the Istanbul entity would
+                    store this this relationship in relOut as {in, Turkey}</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> {}</p>
+                    
+                    
+                    </div>
+                    <div id="property_subs" class="property item">
+                        <h3 class="name"><code>subs</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_CORE_Entity_Entity.js.html#l50"><code>src&#x2F;CORE&#x2F;Entity&#x2F;Entity.js:50</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Sub entities.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_type" class="property item">
+                        <h3 class="name"><code>type</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_CORE_Entity_Entity.js.html#l10"><code>src&#x2F;CORE&#x2F;Entity&#x2F;Entity.js:10</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>For identifying an instance</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
 
 
     </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>API.Semant - SemanticJS</title>
+    <title>CORE.Utils - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -82,12 +82,12 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>API.Semant Class</h1>
+<h1>CORE.Utils Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_API_Semant.js.html#l1"><code>src&#x2F;API&#x2F;Semant.js:1</code></a>
+            Defined in: <a href="../files/src_CORE_Utils_Utils.js.html#l1"><code>src&#x2F;CORE&#x2F;Utils&#x2F;Utils.js:1</code></a>
         </div>
 
 
@@ -95,7 +95,7 @@
 
 
 <div class="box intro">
-    <p>Base class of the API.</p>
+    <p>Static class that contains the utilities.</p>
 
 </div>
 
@@ -105,7 +105,6 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
     </ul>
 
     <div>
@@ -117,34 +116,16 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_createOntology">createOntology</a>
+                                <a href="#method_createURI">createURI</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_getDebug">getDebug</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setDebug">setDebug</a>
+                                <a href="#method_stripDomain">stripDomain</a>
 
                             </li>
                     </ul>
                 </div>
 
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                            <li class="index-item property">
-                                <a href="#property_occupiedDomains">occupiedDomains</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_ontologies">ontologies</a>
-
-                            </li>
-                    </ul>
-                </div>
 
 
         </div>
@@ -152,8 +133,8 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_createOntology" class="method item">
-    <h3 class="name"><code>createOntology</code></h3>
+<div id="method_createURI" class="method item">
+    <h3 class="name"><code>createURI</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -163,12 +144,12 @@
                 <li class="arg">
                         <code>domain</code>
                 </li>
+                <li class="arg">
+                        <code>path</code>
+                </li>
             </ul><span class="paren">)</span>
         </div>
 
-        <span class="returns-inline">
-            <span class="type">Ontology</span>
-        </span>
 
 
 
@@ -179,7 +160,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_CORE_Ontology_createOntology.js.html#l1"><code>src&#x2F;CORE&#x2F;Ontology&#x2F;createOntology.js:1</code></a>
+        <a href="../files/src_CORE_Utils_createURI.js.html#l1"><code>src&#x2F;CORE&#x2F;Utils&#x2F;createURI.js:1</code></a>
         </p>
 
 
@@ -187,7 +168,7 @@
     </div>
 
     <div class="description">
-        <p>Creates an ontology</p>
+        <p>Generates URI for objects.</p>
 
     </div>
 
@@ -201,7 +182,7 @@
 
 
                     <div class="param-description">
-                        <p>Name of the ontology.</p>
+                        <p>Name of the item which the URI will be created.</p>
 
                     </div>
 
@@ -212,7 +193,18 @@
 
 
                     <div class="param-description">
-                        <p>Unique domain of the ontology.</p>
+                        <p>Under what domain the URI will be created</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">path</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>The type of item.</p>
 
                     </div>
 
@@ -220,94 +212,24 @@
             </ul>
         </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Ontology</span>:
-                    <p>Returns the created Ontology object.</p>
-
-            </div>
-        </div>
-
-        <div class="throws">
-            <h4>Throws:</h4>
-
-            <div class="throws-description">
-                        <span class="type">CreateOntologyException</span>:
-                    <p>Cannot create ontology.</p>
-
-            </div>
-        </div>
-
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var semantics = new Semant();
-var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&quot;);
-</code></pre>
-            </div>
-        </div>
-</div>
-<div id="method_getDebug" class="method item">
-    <h3 class="name"><code>getDebug</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Boolean</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_API_Semant.js.html#l38"><code>src&#x2F;API&#x2F;Semant.js:38</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Get debug mode</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Boolean</span>:
-                    <p>Global debug value;</p>
-
-            </div>
-        </div>
 
 
         <div class="example">
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>semantics.getDebug();
+                <pre class="code prettyprint"><code>console.log(createURI(&quot;People&quot;, &quot;http://abc.com&quot;, &quot;ontology&quot;)); //will output - http://abc.com/ontology/People
 </code></pre>
             </div>
         </div>
 </div>
-<div id="method_setDebug" class="method item">
-    <h3 class="name"><code>setDebug</code></h3>
+<div id="method_stripDomain" class="method item">
+    <h3 class="name"><code>stripDomain</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>debug</code>
+                        <code>domain</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -322,7 +244,7 @@ var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&q
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_API_Semant.js.html#l28"><code>src&#x2F;API&#x2F;Semant.js:28</code></a>
+        <a href="../files/src_CORE_Utils_stripDomain.js.html#l1"><code>src&#x2F;CORE&#x2F;Utils&#x2F;stripDomain.js:1</code></a>
         </p>
 
 
@@ -330,7 +252,7 @@ var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&q
     </div>
 
     <div class="description">
-        <p>Change debug mode</p>
+        <p>Converts the domain into the desired form</p>
 
     </div>
 
@@ -339,12 +261,12 @@ var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&q
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">debug</code>
-                        <span class="type">Boolean</span>
+                        <code class="param-name">domain</code>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>Set global debug value to this.</p>
+                        <p>Domain to be converted.</p>
 
                     </div>
 
@@ -354,73 +276,9 @@ var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&q
 
 
 
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>semantics.setDebug(true);
-</code></pre>
-            </div>
-        </div>
 </div>
             </div>
 
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                    <div id="property_occupiedDomains" class="property item">
-                        <h3 class="name"><code>occupiedDomains</code></h3>
-                        <span class="type">Array</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_API_Semant.js.html#l18"><code>src&#x2F;API&#x2F;Semant.js:18</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>List of occupaid domains</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> []</p>
-                    
-                    
-                    </div>
-                    <div id="property_ontologies" class="property item">
-                        <h3 class="name"><code>ontologies</code></h3>
-                        <span class="type">Object</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_API_Semant.js.html#l11"><code>src&#x2F;API&#x2F;Semant.js:11</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>List of created ontologies</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> {}</p>
-                    
-                    
-                    </div>
-            </div>
 
 
     </div>
