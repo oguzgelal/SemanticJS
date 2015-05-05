@@ -101,7 +101,7 @@ var oguz = male.createSubEntity("Oguz");
 var bornIn = ppl.createRelation("bornIn");
 // create literals
 var oguzYear = ppl.createLiteral(1993);
-// see the Relition section
+// see the Relation section
 oguz.addRelation(bornIn, oguzYear);
 ```
 
