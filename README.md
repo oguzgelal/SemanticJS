@@ -23,7 +23,12 @@ The node_modules directory which contains all the third party plugins **(that ar
 All the building process is handled by Grunt. It compresses, optimizes and minifies all the modular javascript structure, and places in the `dist/` directory. The output of library is only one lightweight file, **semantic.min.js** (or semantic.js which is the non-minified version).
 
 Usage
---------
+====
+
+The **full documentation** has been deployed to my server and could be reached at <a href='semanticjs.oguzgelal.com' target='_new'>semanticjs.oguzgelal.com</a>.
+
+Semant Object
+-----
 
 Before creating any ontologies, you should start with initialising the `Semant` object.
 
@@ -37,13 +42,21 @@ Semant object is the global namespace of this API. With this var, you control gl
 semantics.setDebug(true);
 ```
 
-Debug variable already defults to `true`. Basically, it enables and disables all the `console.logs()`'s through out the API. You also create ontologies from this var.
+Debug variable already defults to `true`. Basically, it enables and disables all the `console.logs()`'s through out the API. 
+
+Ontology
+----
+
+You also create ontologies from the Semant object.
 
 ```Javascript
 var people = semantics.createOntology("People", "http://ppl.com");
 ```
 
-Every ontology must have a **name** and a **unique domain**. URI's will be generated with these info. If something goes wrong while creating ontology, `createOntologyException` will be thworn. Once you create an ontology, you can now create under an ontology:
+Every ontology must have a **name** and a **unique domain**. URI's will be generated with these info. If something goes wrong while creating ontology, `createOntologyException` will be thworn. Once you create an ontology, you can now create an entity under an ontology:
+
+Entity
+----
 
 ```Javascript
 var male = people.createEntity("Male");
@@ -71,6 +84,30 @@ female.makeSubEntity(human);
 ```
 
 As in Ontologies, every entity must have a **unique name** so that unique URI's could be created. If anything goes wrong, `createEntityException` will be thrown.
+
+Relation
+---
+
+Relations are created under ontologies. Once they are created, they are assigned to entities. They could be created with `createRelation` method of the Ontology objects.
+
+```Javascript
+var semantics = new Semant();
+var geo = semantics.createOntology("Geo", "http://geo.com");
+var in = geo.createRelation("in");
+```
+
+Here, we created an **in** relationship under *geo* Ontology. After we created relations, we can assign it to entities with the `addRelations` method called from Entity objects.
+
+```Javascript
+var semantics = new Semant();
+var geo = semantics.createOntology("Geo", "http://geo.com");
+var in = geo.createRelation("in");
+var turkey = geo.createEntity("Turkey");
+var istanbul = geo.createEntity("Istanbul");
+istanbul.addRelation(in, turkey);
+```
+
+Above, we created **turkey** and **istanbul** entity, and **in** relationship. We assigned the in property in such a way that it binds istanbul entity to turkey entity. The relOut variable of istanbul looks like `[[in, turkey]]` and relIn variable or turkey looks like `[[in, istanbul]]`.
 
 Exceptions
 ------
