@@ -38,6 +38,7 @@ Creates an entity. Called from the Ontology object.
 				var entity = new Entity(name);
 				// determine the context ontology of the entity
 				entity.ontology = this;
+				entity.URI = URI;
 				this.entityCollection[name] = entity;
 				if (SEMANTICS.debug){ console.log("Entity '"+name+"' created."); }
 				return entity;

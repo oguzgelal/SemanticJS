@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/CORE/Entity/makeSubEntity.js - SemanticJS</title>
+    <title>src/CORE/Relation/Relation.js - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -86,44 +86,47 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/CORE/Entity/makeSubEntity.js</h1>
+<h1 class="file-heading">File: src/CORE/Relation/Relation.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-Makes an entity a sub entity of another.
+@class CORE.Relation
+@constructor
+@param {String} name Name of the relation
+*/
 
-@event makeSubEntity
-@for CORE.Entity
-@throws {makeSubEntityException} Cannot make sub entity.
-@param {Object} parentEntity Parent object of this soon-to-be sub entity
-@example
-	var semantics = new Semant();
-	var alive = semantics.createOntology(&quot;Alive&quot;, &quot;http://alive.com&quot;);
-	var people = ont_people.createEntity(&quot;People&quot;);
-	var male = ont_people.createEntity(&quot;Male&quot;);
-	var female = ont_people.createEntity(&quot;Femal&quot;);
-	male.makeSubEntity(people);
-	female.makeSubEntity(people);
-	// same as doing this:
-	// people.createSubEntity(&quot;Male&quot;);
-	// people.createSubEntity(&quot;Female&quot;);
-	*/
+define(function(){
+	
+	function Relation(name) {
+		/**
+		For identifying an instance
+		@property type
+		@type String
+		*/
+		this.type = &quot;relation&quot;;
+		/**
+		Name of the entity
+		@property name
+		@type String
+		*/
+		this.name = name;
+		/**
+		URI of the relation
+		@property name
+		@type String
+		*/
+		this.URI = null;
+		/**
+		The ontology this entity is created under
+		@property ontology
+		@type Object
+		*/
+		this.ontology = null;
+	}
 
-	define(function(){
-
-		var makeSubEntity = function(parentEntity){
-
-			var makeSubEntityException = require(&#x27;CORE/Exception/makeSubEntityException&#x27;);
-			if (typeof parentEntity !== &quot;object&quot; || !parentEntity.type || parentEntity.type !== &quot;entity&quot;){ throw new makeSubEntityException(&quot;The argument of makeSubEntity must be entity object.&quot;); }
-			if (this.parent !== null){ throw new makeSubEntityException(&quot;&#x27;&quot;+this.name+&quot;&#x27; Entity already has a parent&quot;); }
-			parentEntity.subs[this.name] = this;
-			this.parent = parentEntity;
-			if (SEMANTICS.debug){ console.log(&quot;Entity &#x27;&quot;+this.name+&quot;&#x27; is now a sub-entity of &#x27;&quot;+parentEntity.name+&quot;&#x27;.&quot;); }
-		};
-
-		return makeSubEntity;
-	});
+	return Relation;
+});
     </pre>
 </div>
                     </div>

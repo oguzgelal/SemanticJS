@@ -59,6 +59,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/CORE/Exception/addRelationException.js": {
+            "name": "src/CORE/Exception/addRelationException.js",
+            "modules": {},
+            "classes": {
+                "CORE.Exception.addRelationException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/CORE/Exception/createEntityException.js": {
             "name": "src/CORE/Exception/createEntityException.js",
             "modules": {},
@@ -73,6 +82,15 @@
             "modules": {},
             "classes": {
                 "CORE.Exception.createOntologyException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Exception/createRelationException.js": {
+            "name": "src/CORE/Exception/createRelationException.js",
+            "modules": {},
+            "classes": {
+                "CORE.Exception.createRelationException": 1
             },
             "fors": {},
             "namespaces": {}
@@ -110,6 +128,33 @@
             "classes": {},
             "fors": {
                 "API.Semant": 1
+            },
+            "namespaces": {}
+        },
+        "src/CORE/Relation/Relation.js": {
+            "name": "src/CORE/Relation/Relation.js",
+            "modules": {},
+            "classes": {
+                "CORE.Relation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Relation/addRelation.js": {
+            "name": "src/CORE/Relation/addRelation.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Entity": 1
+            },
+            "namespaces": {}
+        },
+        "src/CORE/Relation/createRelation.js": {
+            "name": "src/CORE/Relation/createRelation.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Ontology": 1
             },
             "namespaces": {}
         },
@@ -213,6 +258,27 @@
             "description": "Exception base class of SemantJS.",
             "is_constructor": 1
         },
+        "CORE.Exception.addRelationException": {
+            "name": "CORE.Exception.addRelationException",
+            "shortname": "CORE.Exception.addRelationException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Exception/addRelationException.js",
+            "line": 1,
+            "description": "Relation cannot be added exception",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Information on why the relation could not be added.",
+                    "type": "String"
+                }
+            ],
+            "extends": "CORE.Exception"
+        },
         "CORE.Exception.createEntityException": {
             "name": "CORE.Exception.createEntityException",
             "shortname": "CORE.Exception.createEntityException",
@@ -250,6 +316,27 @@
                 {
                     "name": "message",
                     "description": "Information on why the ontology could not be created.",
+                    "type": "String"
+                }
+            ],
+            "extends": "CORE.Exception"
+        },
+        "CORE.Exception.createRelationException": {
+            "name": "CORE.Exception.createRelationException",
+            "shortname": "CORE.Exception.createRelationException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Exception/createRelationException.js",
+            "line": 1,
+            "description": "Relation cannot be created exception",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Information on why the relation could not be created.",
                     "type": "String"
                 }
             ],
@@ -296,6 +383,25 @@
                 }
             ],
             "extends": "CORE.Exception"
+        },
+        "CORE.Relation": {
+            "name": "CORE.Relation",
+            "shortname": "CORE.Relation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Relation/Relation.js",
+            "line": 1,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the relation",
+                    "type": "String"
+                }
+            ]
         },
         "CORE.Utils": {
             "name": "CORE.Utils",
@@ -386,26 +492,35 @@
         {
             "file": "src/CORE/Entity/Entity.js",
             "line": 22,
-            "description": "The relationships where this entity is the domain. What this variable\nstores is {relationship, entity} or {relationship, literal}. For example\nin a relationship like Istanbul -in-> Turkey, the Istanbul entity would\nstore this this relationship in relOut as {in, Turkey}",
+            "description": "URI of the entity",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "CORE.Entity"
+        },
+        {
+            "file": "src/CORE/Entity/Entity.js",
+            "line": 28,
+            "description": "The relationships where this entity is the domain. What this variable\nstores is {relationship, entity} or {relationship, literal}. For example\nin a relationship like Istanbul -in-> Turkey, the Istanbul entity would\nstore this relationship in relOut as [[in, Turkey]]",
             "itemtype": "property",
             "name": "relOut",
-            "type": "Object",
-            "default": "{}",
+            "type": "Array",
+            "default": "[]",
             "class": "CORE.Entity"
         },
         {
             "file": "src/CORE/Entity/Entity.js",
-            "line": 33,
-            "description": "The relationships where this entity is the range. What this variable\nstores is {relationship, entity}. For example\nin a relationship like Istanbul -in-> Turkey, the instance Turkey would\nstore this this relationship in relIn as {in, Istanbul}",
+            "line": 39,
+            "description": "The relationships where this entity is the range. What this variable\nstores is {relationship, entity}. For example\nin a relationship like Istanbul -in-> Turkey, the instance Turkey would\nstore this this relationship in relIn as [[in, Istanbul]]",
             "itemtype": "property",
             "name": "relIn",
-            "type": "Object",
-            "default": "{}",
+            "type": "Array",
+            "default": "[]",
             "class": "CORE.Entity"
         },
         {
             "file": "src/CORE/Entity/Entity.js",
-            "line": 44,
+            "line": 50,
             "description": "Individuals of this entity",
             "itemtype": "property",
             "name": "individuals",
@@ -414,7 +529,7 @@
         },
         {
             "file": "src/CORE/Entity/Entity.js",
-            "line": 50,
+            "line": 56,
             "description": "Sub entities.",
             "itemtype": "property",
             "name": "subs",
@@ -423,7 +538,7 @@
         },
         {
             "file": "src/CORE/Entity/Entity.js",
-            "line": 56,
+            "line": 62,
             "description": "Parent entity.",
             "itemtype": "property",
             "name": "parent",
@@ -432,7 +547,7 @@
         },
         {
             "file": "src/CORE/Entity/Entity.js",
-            "line": 62,
+            "line": 68,
             "description": "The ontology this entity is created under",
             "itemtype": "property",
             "name": "ontology",
@@ -592,6 +707,15 @@
         {
             "file": "src/CORE/Ontology/Ontology.js",
             "line": 25,
+            "description": "URI of the ontology",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "CORE.Ontology"
+        },
+        {
+            "file": "src/CORE/Ontology/Ontology.js",
+            "line": 31,
             "description": "Domain of the ontology where all the URI's will be based on",
             "itemtype": "property",
             "name": "domain",
@@ -601,7 +725,7 @@
         },
         {
             "file": "src/CORE/Ontology/Ontology.js",
-            "line": 32,
+            "line": 38,
             "itemtype": "property",
             "name": "entityCollection",
             "type": "Object {Entity name, Entity}",
@@ -610,7 +734,7 @@
         },
         {
             "file": "src/CORE/Ontology/Ontology.js",
-            "line": 38,
+            "line": 44,
             "description": "Keeps every URI created under this ontology. Will be used for uniqueness check.",
             "itemtype": "property",
             "name": "occupiedURIs",
@@ -648,6 +772,95 @@
                 "\n\tvar semantics = new Semant();\n\tvar people = semantics.createOntology(\"People\", \"http://ppl.com\");"
             ],
             "class": "API.Semant"
+        },
+        {
+            "file": "src/CORE/Relation/Relation.js",
+            "line": 10,
+            "description": "For identifying an instance",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "class": "CORE.Relation"
+        },
+        {
+            "file": "src/CORE/Relation/Relation.js",
+            "line": 16,
+            "description": "Name of the entity",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "CORE.Relation"
+        },
+        {
+            "file": "src/CORE/Relation/Relation.js",
+            "line": 22,
+            "description": "URI of the relation",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "CORE.Relation"
+        },
+        {
+            "file": "src/CORE/Relation/Relation.js",
+            "line": 28,
+            "description": "The ontology this entity is created under",
+            "itemtype": "property",
+            "name": "ontology",
+            "type": "Object",
+            "class": "CORE.Relation"
+        },
+        {
+            "file": "src/CORE/Relation/addRelation.js",
+            "line": 1,
+            "description": "Adds a relation from an entity to another entity or literal.",
+            "itemtype": "event",
+            "name": "addRelation",
+            "throws": {
+                "description": "Cannot add relation.",
+                "type": "AddRelationException"
+            },
+            "params": [
+                {
+                    "name": "relation",
+                    "description": "The object of relation to be added.",
+                    "type": "Object"
+                },
+                {
+                    "name": "target",
+                    "description": "The target object. Could be an entity or literal object.",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n\tvar semantics = new Semant();\n\tvar geo = semantics.createOntology(\"Geo\", \"http://geo.com\");\n\tvar in = geo.createRelation(\"in\");\n\tvar turkey = geo.createEntity(\"Turkey\");\n\tvar istanbul = geo.createEntity(\"Istanbul\");\n\tistanbul.addRelation(in, turkey);"
+            ],
+            "class": "CORE.Entity"
+        },
+        {
+            "file": "src/CORE/Relation/createRelation.js",
+            "line": 1,
+            "description": "Adds a relation from an entity to another entity or literal.",
+            "itemtype": "method",
+            "name": "createRelation",
+            "throws": {
+                "description": "Cannot create relation.",
+                "type": "CreateRelationException"
+            },
+            "params": [
+                {
+                    "name": "relation",
+                    "description": "The object of relation to be added.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the created Relation object.",
+                "type": "Relation"
+            },
+            "example": [
+                "\n\tvar semantics = new Semant();\n\tvar geo = semantics.createOntology(\"Geo\", \"http://geo.com\");\n\tvar in = geo.createRelation(\"in\");"
+            ],
+            "class": "CORE.Ontology"
         },
         {
             "file": "src/CORE/Utils/createURI.js",

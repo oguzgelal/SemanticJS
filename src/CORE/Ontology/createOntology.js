@@ -38,6 +38,7 @@ Creates an ontology
 				this.occupiedDomains.push(domain);
 				var ontology = new Ontology(name, domain);
 				var URI = Utils.createURI(name, domain, 'ontology');
+				ontology.URI = URI;
 				this.ontologies[URI] = ontology;
 				if (SEMANTICS.debug){ console.log("Ontology '"+name+"' created."); }
 				return ontology;

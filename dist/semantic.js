@@ -1,6 +1,6 @@
 ;(function(window, document, navigator, undefined) {
 var SEMANTICS={debug:true};
-var CORE_Exception_Exception, CORE_Exception_createURIException, CORE_Utils_createURI, CORE_Utils_stripDomain, CORE_Utils_Utils, CORE_Exception_createEntityException, CORE_Entity_createSubEntity, CORE_Exception_makeSubEntityException, CORE_Entity_makeSubEntity, CORE_Entity_Entity, CORE_Entity_createEntity, CORE_Ontology_Ontology, CORE_Exception_createOntologyException, CORE_Ontology_createOntology, API_Semant;
+var CORE_Exception_Exception, CORE_Exception_createURIException, CORE_Utils_createURI, CORE_Utils_stripDomain, CORE_Utils_Utils, CORE_Exception_createEntityException, CORE_Entity_createSubEntity, CORE_Exception_makeSubEntityException, CORE_Entity_makeSubEntity, CORE_Exception_addRelationException, CORE_Relation_addRelation, CORE_Entity_Entity, CORE_Entity_createEntity, CORE_Relation_Relation, CORE_Exception_createRelationException, CORE_Relation_createRelation, CORE_Ontology_Ontology, CORE_Exception_createOntologyException, CORE_Ontology_createOntology, API_Semant;
 CORE_Exception_Exception = function () {
   function Exception() {
     this.code = undefined;
@@ -160,12 +160,50 @@ CORE_Entity_makeSubEntity = function () {
   };
   return makeSubEntity;
 }();
+CORE_Exception_addRelationException = function () {
+  var Exception = CORE_Exception_Exception;
+  function addRelationException(message) {
+    this.code = 5;
+    this.name = 'Add relation failed';
+    this.notice = 'Relation cannot be added';
+    this.message = message;
+    if (SEMANTICS.debug) {
+      console.log(this.details());
+    }
+  }
+  addRelationException.prototype = new Exception();
+  return addRelationException;
+}();
+CORE_Relation_addRelation = function () {
+  var addRelation = function (relation, target) {
+    var createEntityException = CORE_Exception_createEntityException;
+    var addRelationException = CORE_Exception_addRelationException;
+    if (typeof relation !== 'object' || !relation.type || relation.type !== 'relation') {
+      throw new addRelationException('The first argument of addRelation must be a relation object.');
+    }
+    if (typeof target !== 'object' || !target.type || target.type !== 'entity' && target.type !== 'literal') {
+      throw new addRelationException('The second argument of addRelation must be a entity or literal object.');
+    }
+    this.relOut.push([
+      relation,
+      target
+    ]);
+    if (target.type === 'entity') {
+      target.relIn.push([
+        relation,
+        this
+      ]);
+    }
+  };
+  return addRelation;
+}();
 CORE_Entity_Entity = function () {
   function Entity(name) {
     this.type = 'entity';
     this.name = name;
-    this.relOut = {};
-    this.relIn = {};
+    this.URI = null;
+    this.relOut = [];
+    this.relIn = [];
     this.individuals = {};
     this.subs = {};
     this.parent = null;
@@ -173,6 +211,7 @@ CORE_Entity_Entity = function () {
   }
   Entity.prototype.createSubEntity = CORE_Entity_createSubEntity;
   Entity.prototype.makeSubEntity = CORE_Entity_makeSubEntity;
+  Entity.prototype.addRelation = CORE_Relation_addRelation;
   return Entity;
 }();
 CORE_Entity_createEntity = function () {
@@ -199,6 +238,7 @@ CORE_Entity_createEntity = function () {
       this.occupiedURIs.push(URI);
       var entity = new Entity(name);
       entity.ontology = this;
+      entity.URI = URI;
       this.entityCollection[name] = entity;
       if (SEMANTICS.debug) {
         console.log('Entity \'' + name + '\' created.');
@@ -208,15 +248,73 @@ CORE_Entity_createEntity = function () {
   };
   return createEntity;
 }();
+CORE_Relation_Relation = function () {
+  function Relation(name) {
+    this.type = 'relation';
+    this.name = name;
+    this.URI = null;
+    this.ontology = null;
+  }
+  return Relation;
+}();
+CORE_Exception_createRelationException = function () {
+  var Exception = CORE_Exception_Exception;
+  function createRelationException(message) {
+    this.code = 4;
+    this.name = 'Create relation failed';
+    this.notice = 'Relation cannot be created';
+    this.message = message;
+    if (SEMANTICS.debug) {
+      console.log(this.details());
+    }
+  }
+  createRelationException.prototype = new Exception();
+  return createRelationException;
+}();
+CORE_Relation_createRelation = function () {
+  var createRelation = function (name) {
+    var Relation = CORE_Relation_Relation;
+    var Utils = CORE_Utils_Utils;
+    var createRelationException = CORE_Exception_createRelationException;
+    if (typeof name !== 'string') {
+      throw new createRelationException('Argument of \'createRelation\' must be of type \'String\' and indicate the name of the relation.');
+    }
+    if (!name || name && name.length === 0) {
+      throw new createRelationException('Argument of \'createRelation\' is blank or empty.');
+    }
+    if (!this.name) {
+      throw new createRelationException('Unique name of the ontology should be set before creating any entities.');
+    }
+    if (!this.domain) {
+      throw new createRelationException('Unique domain of the ontology should be set before creating any entities.');
+    }
+    var URI = Utils.createURI(name, this.domain, 'relation');
+    if (this.occupiedURIs.indexOf(URI) != -1) {
+      throw new createRelationException('A relation with the same name already exists.');
+    } else {
+      this.occupiedURIs.push(URI);
+      var relation = new Relation(name);
+      relation.ontology = this;
+      relation.URI = URI;
+      if (SEMANTICS.debug) {
+        console.log('Relation \'' + name + '\' created.');
+      }
+      return relation;
+    }
+  };
+  return createRelation;
+}();
 CORE_Ontology_Ontology = function () {
   function Ontology(name, domain) {
     this.type = 'ontology';
     this.name = name;
+    this.URI = null;
     this.domain = domain;
     this.entityCollection = {};
     this.occupiedURIs = [];
   }
   Ontology.prototype.createEntity = CORE_Entity_createEntity;
+  Ontology.prototype.createRelation = CORE_Relation_createRelation;
   return Ontology;
 }();
 CORE_Exception_createOntologyException = function () {
@@ -257,6 +355,7 @@ CORE_Ontology_createOntology = function () {
       this.occupiedDomains.push(domain);
       var ontology = new Ontology(name, domain);
       var URI = Utils.createURI(name, domain, 'ontology');
+      ontology.URI = URI;
       this.ontologies[URI] = ontology;
       if (SEMANTICS.debug) {
         console.log('Ontology \'' + name + '\' created.');

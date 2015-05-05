@@ -23,6 +23,12 @@ define(function(){
 		*/
 		this.name = name;
 		/**
+		URI of the ontology
+		@property name
+		@type String
+		*/
+		this.URI = null;
+		/**
 		Domain of the ontology where all the URI's will be based on
 		@property domain
 		@type String
@@ -46,6 +52,7 @@ define(function(){
 	}
 
 	Ontology.prototype.createEntity = require('CORE/Entity/createEntity');
+	Ontology.prototype.createRelation = require('CORE/Relation/createRelation');
 
 	return Ontology;
 });

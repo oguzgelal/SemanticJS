@@ -20,6 +20,12 @@ define(function(){
 		*/
 		this.name = name;
 		/**
+		URI of the relation
+		@property name
+		@type String
+		*/
+		this.URI = null;
+		/**
 		The ontology this entity is created under
 		@property ontology
 		@type Object

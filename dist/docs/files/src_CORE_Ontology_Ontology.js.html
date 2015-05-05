@@ -41,11 +41,14 @@
                                 <li><a href="../classes/API.Semant.html">API.Semant</a></li>
                                 <li><a href="../classes/CORE.Entity.html">CORE.Entity</a></li>
                                 <li><a href="../classes/CORE.Exception.html">CORE.Exception</a></li>
+                                <li><a href="../classes/CORE.Exception.addRelationException.html">CORE.Exception.addRelationException</a></li>
                                 <li><a href="../classes/CORE.Exception.createEntityException.html">CORE.Exception.createEntityException</a></li>
                                 <li><a href="../classes/CORE.Exception.createOntologyException.html">CORE.Exception.createOntologyException</a></li>
+                                <li><a href="../classes/CORE.Exception.createRelationException.html">CORE.Exception.createRelationException</a></li>
                                 <li><a href="../classes/CORE.Exception.createURIException.html">CORE.Exception.createURIException</a></li>
                                 <li><a href="../classes/CORE.Exception.makeSubEntityException.html">CORE.Exception.makeSubEntityException</a></li>
                                 <li><a href="../classes/CORE.Ontology.html">CORE.Ontology</a></li>
+                                <li><a href="../classes/CORE.Relation.html">CORE.Relation</a></li>
                                 <li><a href="../classes/CORE.Utils.html">CORE.Utils</a></li>
                             </ul>
                 
@@ -112,6 +115,12 @@ define(function(){
 		*/
 		this.name = name;
 		/**
+		URI of the ontology
+		@property name
+		@type String
+		*/
+		this.URI = null;
+		/**
 		Domain of the ontology where all the URI&#x27;s will be based on
 		@property domain
 		@type String
@@ -135,6 +144,7 @@ define(function(){
 	}
 
 	Ontology.prototype.createEntity = require(&#x27;CORE/Entity/createEntity&#x27;);
+	Ontology.prototype.createRelation = require(&#x27;CORE/Relation/createRelation&#x27;);
 
 	return Ontology;
 });

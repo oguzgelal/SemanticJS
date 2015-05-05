@@ -20,27 +20,33 @@ define(function(){
 		*/
 		this.name = name;
 		/**
+		URI of the entity
+		@property name
+		@type String
+		*/
+		this.URI = null;
+		/**
 		The relationships where this entity is the domain. What this variable
 		stores is {relationship, entity} or {relationship, literal}. For example
 		in a relationship like Istanbul -in-> Turkey, the Istanbul entity would
-		store this this relationship in relOut as {in, Turkey}
+		store this relationship in relOut as [[in, Turkey]]
 
 		@property relOut
-		@type Object
-		@default {}
+		@type Array
+		@default []
 		*/
-		this.relOut = {};
+		this.relOut = [];
 		/**
 		The relationships where this entity is the range. What this variable
 		stores is {relationship, entity}. For example
 		in a relationship like Istanbul -in-> Turkey, the instance Turkey would
-		store this this relationship in relIn as {in, Istanbul}
+		store this this relationship in relIn as [[in, Istanbul]]
 
 		@property relIn
-		@type Object
-		@default {}
+		@type Array
+		@default []
 		*/
-		this.relIn = {};
+		this.relIn = [];
 		/**
 		Individuals of this entity
 		@property individuals
@@ -68,6 +74,7 @@ define(function(){
 	}
 	Entity.prototype.createSubEntity = require('CORE/Entity/createSubEntity');
 	Entity.prototype.makeSubEntity = require('CORE/Entity/makeSubEntity');
+	Entity.prototype.addRelation = require('CORE/Relation/addRelation');
 
 	return Entity;
 });

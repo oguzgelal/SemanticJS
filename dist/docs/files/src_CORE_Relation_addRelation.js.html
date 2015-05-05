@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/CORE/Entity/makeSubEntity.js - SemanticJS</title>
+    <title>src/CORE/Relation/addRelation.js - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -86,43 +86,51 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/CORE/Entity/makeSubEntity.js</h1>
+<h1 class="file-heading">File: src/CORE/Relation/addRelation.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-Makes an entity a sub entity of another.
+Adds a relation from an entity to another entity or literal.
 
-@event makeSubEntity
+@event addRelation
 @for CORE.Entity
-@throws {makeSubEntityException} Cannot make sub entity.
-@param {Object} parentEntity Parent object of this soon-to-be sub entity
+@throws {addRelationException} Cannot add relation.
+@param {Object} relation The object of relation to be added.
+@param {Object} target The target object. Could be an entity or literal object.
 @example
 	var semantics = new Semant();
-	var alive = semantics.createOntology(&quot;Alive&quot;, &quot;http://alive.com&quot;);
-	var people = ont_people.createEntity(&quot;People&quot;);
-	var male = ont_people.createEntity(&quot;Male&quot;);
-	var female = ont_people.createEntity(&quot;Femal&quot;);
-	male.makeSubEntity(people);
-	female.makeSubEntity(people);
-	// same as doing this:
-	// people.createSubEntity(&quot;Male&quot;);
-	// people.createSubEntity(&quot;Female&quot;);
+	var geo = semantics.createOntology(&quot;Geo&quot;, &quot;http://geo.com&quot;);
+	var in = geo.createRelation(&quot;in&quot;);
+	var turkey = geo.createEntity(&quot;Turkey&quot;);
+	var istanbul = geo.createEntity(&quot;Istanbul&quot;);
+	istanbul.addRelation(in, turkey);
 	*/
 
 	define(function(){
 
-		var makeSubEntity = function(parentEntity){
+		var addRelation = function(relation, target){
+			
+			var createEntityException = require(&#x27;CORE/Exception/createEntityException&#x27;);
+			var addRelationException = require(&#x27;CORE/Exception/addRelationException&#x27;);
 
-			var makeSubEntityException = require(&#x27;CORE/Exception/makeSubEntityException&#x27;);
-			if (typeof parentEntity !== &quot;object&quot; || !parentEntity.type || parentEntity.type !== &quot;entity&quot;){ throw new makeSubEntityException(&quot;The argument of makeSubEntity must be entity object.&quot;); }
-			if (this.parent !== null){ throw new makeSubEntityException(&quot;&#x27;&quot;+this.name+&quot;&#x27; Entity already has a parent&quot;); }
-			parentEntity.subs[this.name] = this;
-			this.parent = parentEntity;
-			if (SEMANTICS.debug){ console.log(&quot;Entity &#x27;&quot;+this.name+&quot;&#x27; is now a sub-entity of &#x27;&quot;+parentEntity.name+&quot;&#x27;.&quot;); }
+			// type checks
+			if (typeof relation !== &quot;object&quot; || !relation.type || relation.type !== &quot;relation&quot;){
+				throw new addRelationException(&quot;The first argument of addRelation must be a relation object.&quot;);
+			}
+			if (typeof target !== &quot;object&quot; || !target.type || (target.type !== &quot;entity&quot; &amp;&amp; target.type !== &quot;literal&quot;)){
+				throw new addRelationException(&quot;The second argument of addRelation must be a entity or literal object.&quot;);
+			}
+
+			// add the relation to the relout of the source object
+			this.relOut.push([relation, target]);
+
+			// add the relation to the relin of the target object if entity
+			if (target.type === &quot;entity&quot;){ target.relIn.push([relation, this]); }
+			
 		};
 
-		return makeSubEntity;
+		return addRelation;
 	});
     </pre>
 </div>
