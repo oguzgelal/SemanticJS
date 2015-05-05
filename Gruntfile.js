@@ -53,6 +53,8 @@ module.exports = function(grunt) {
       compile: {
         name: '<%= pkg.name %>',
         description: '<%= pkg.description %>',
+        url: "http://semanticjs.oguzgelal.com",
+        logo: "http://i.imgur.com/j0eb5up.png",
         version: '<%= pkg.version %>',
         options: {
           paths: 'src/',
