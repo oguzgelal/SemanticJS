@@ -114,18 +114,18 @@ Relations are also created under ontologies. Once they are created, they are ass
 ```Javascript
 var semantics = new Semant();
 var geo = semantics.createOntology("Geo", "http://geo.com");
-var in = geo.createRelation("in");
+var inLocation = geo.createRelation("in");
 ```
 
-Here, we created an **in** relationship under *geo* Ontology. After we created relations, we can assign it to entities with the `addRelations` method called from Entity objects.
+Here, we created an **inLocation** relationship under *geo* Ontology. After we created relations, we can assign it to entities with the `addRelations` method called from Entity objects.
 
 ```Javascript
 var semantics = new Semant();
 var geo = semantics.createOntology("Geo", "http://geo.com");
-var in = geo.createRelation("in");
+var inLocation = geo.createRelation("in");
 var turkey = geo.createEntity("Turkey");
 var istanbul = geo.createEntity("Istanbul");
-istanbul.addRelation(in, turkey);
+istanbul.addRelation(inLocation, turkey);
 ```
 
 Above, we created **turkey** and **istanbul** entity, and **in** relationship. We assigned the in property in such a way that it binds istanbul entity to turkey entity. The relOut variable of istanbul looks like `[[in, turkey]]` and relIn variable or turkey looks like `[[in, istanbul]]`.
