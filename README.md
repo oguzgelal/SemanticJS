@@ -128,7 +128,7 @@ var istanbul = geo.createEntity("Istanbul");
 istanbul.addRelation(inLocation, turkey);
 ```
 
-Above, we created **turkey** and **istanbul** entity, and **in** relationship. We assigned the in property in such a way that it binds istanbul entity to turkey entity. The relOut variable of istanbul looks like `[[in, turkey]]` and relIn variable or turkey looks like `[[in, istanbul]]`.
+Above, we created **turkey** and **istanbul** entity, and **inLocation** relationship. We assigned the in property in such a way that it binds istanbul entity to turkey entity. The relOut variable of istanbul looks like `[[inLocation, turkey]]` and relIn variable or turkey looks like `[[inLocation, istanbul]]`.
 
 Exceptions
 ------
