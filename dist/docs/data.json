@@ -503,8 +503,8 @@
             },
             "params": [
                 {
-                    "name": "subent",
-                    "description": "Object of the soon-to-be sub entity",
+                    "name": "parentEntity",
+                    "description": "Parent object of this soon-to-be sub entity",
                     "type": "Object"
                 }
             ],
