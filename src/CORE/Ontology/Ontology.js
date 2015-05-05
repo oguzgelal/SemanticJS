@@ -24,7 +24,7 @@ define(function(){
 		this.name = name;
 		/**
 		URI of the ontology
-		@property name
+		@property URI
 		@type String
 		*/
 		this.URI = null;

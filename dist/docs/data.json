@@ -494,7 +494,7 @@
             "line": 22,
             "description": "URI of the entity",
             "itemtype": "property",
-            "name": "name",
+            "name": "URI",
             "type": "String",
             "class": "CORE.Entity"
         },
@@ -709,7 +709,7 @@
             "line": 25,
             "description": "URI of the ontology",
             "itemtype": "property",
-            "name": "name",
+            "name": "URI",
             "type": "String",
             "class": "CORE.Ontology"
         },
@@ -796,7 +796,7 @@
             "line": 22,
             "description": "URI of the relation",
             "itemtype": "property",
-            "name": "name",
+            "name": "URI",
             "type": "String",
             "class": "CORE.Relation"
         },

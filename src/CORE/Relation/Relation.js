@@ -21,7 +21,7 @@ define(function(){
 		this.name = name;
 		/**
 		URI of the relation
-		@property name
+		@property URI
 		@type String
 		*/
 		this.URI = null;
