@@ -43,10 +43,13 @@
                                 <li><a href="../classes/CORE.Exception.html">CORE.Exception</a></li>
                                 <li><a href="../classes/CORE.Exception.addRelationException.html">CORE.Exception.addRelationException</a></li>
                                 <li><a href="../classes/CORE.Exception.createEntityException.html">CORE.Exception.createEntityException</a></li>
+                                <li><a href="../classes/CORE.Exception.createLiteralException.html">CORE.Exception.createLiteralException</a></li>
                                 <li><a href="../classes/CORE.Exception.createOntologyException.html">CORE.Exception.createOntologyException</a></li>
                                 <li><a href="../classes/CORE.Exception.createRelationException.html">CORE.Exception.createRelationException</a></li>
                                 <li><a href="../classes/CORE.Exception.createURIException.html">CORE.Exception.createURIException</a></li>
                                 <li><a href="../classes/CORE.Exception.makeSubEntityException.html">CORE.Exception.makeSubEntityException</a></li>
+                                <li><a href="../classes/CORE.Export.html">CORE.Export</a></li>
+                                <li><a href="../classes/CORE.Literal.html">CORE.Literal</a></li>
                                 <li><a href="../classes/CORE.Ontology.html">CORE.Ontology</a></li>
                                 <li><a href="../classes/CORE.Relation.html">CORE.Relation</a></li>
                                 <li><a href="../classes/CORE.Utils.html">CORE.Utils</a></li>
@@ -195,6 +198,10 @@
 
                             </li>
                             <li class="index-item method">
+                                <a href="#method_createLiteral">createLiteral</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_createRelation">createRelation</a>
 
                             </li>
@@ -324,6 +331,95 @@ var female = ont_people.createEntity(&quot;Femal&quot;);
             </div>
         </div>
 </div>
+<div id="method_createLiteral" class="method item">
+    <h3 class="name"><code>createLiteral</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Literal</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_CORE_Literal_createLiteral.js.html#l1"><code>src&#x2F;CORE&#x2F;Literal&#x2F;createLiteral.js:1</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Creates a literal</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>The object of relation to be added.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Literal</span>:
+                    <p>Returns the created Relation object.</p>
+
+            </div>
+        </div>
+
+        <div class="throws">
+            <h4>Throws:</h4>
+
+            <div class="throws-description">
+                        <span class="type">CreateLiteralException</span>:
+                    <p>Cannot create literal.</p>
+
+            </div>
+        </div>
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var ppl = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&quot;);
+var male = ppl.createEntity(&quot;Male&quot;);
+var female = ppl.createEntity(&quot;Female&quot;);
+var bornIn = ppl.createRelation(&quot;bornIn&quot;);
+var oguz = male.createSubEntity(&quot;Oguz&quot;);
+var oguzYear = ppl.createLiteral(1993);
+oguz.addRelation(bornIn, oguzYear);
+</code></pre>
+            </div>
+        </div>
+</div>
 <div id="method_createRelation" class="method item">
     <h3 class="name"><code>createRelation</code></h3>
 
@@ -356,7 +452,7 @@ var female = ont_people.createEntity(&quot;Femal&quot;);
     </div>
 
     <div class="description">
-        <p>Adds a relation from an entity to another entity or literal.</p>
+        <p>Creates a relation.</p>
 
     </div>
 

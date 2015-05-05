@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/CORE/Relation/addRelation.js - SemanticJS</title>
+    <title>src/CORE/Literal/createLiteral.js - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -89,51 +89,68 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/CORE/Relation/addRelation.js</h1>
+<h1 class="file-heading">File: src/CORE/Literal/createLiteral.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-Adds a relation from an entity to another entity or literal.
+Creates a literal
 
-@event addRelation
-@for CORE.Entity
-@throws {addRelationException} Cannot add relation.
-@param {Object} relation The object of relation to be added.
-@param {Object} target The target object. Could be an entity or literal object.
+@method createLiteral
+@for CORE.Ontology
+@throws {createLiteralException} Cannot create literal.
+@param {Object} value The object of relation to be added.
+@return {Literal} Returns the created Relation object.
 @example
-	var semantics = new Semant();
-	var geo = semantics.createOntology(&quot;Geo&quot;, &quot;http://geo.com&quot;);
-	var in = geo.createRelation(&quot;in&quot;);
-	var turkey = geo.createEntity(&quot;Turkey&quot;);
-	var istanbul = geo.createEntity(&quot;Istanbul&quot;);
-	istanbul.addRelation(in, turkey);
+	var ppl = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&quot;);
+	var male = ppl.createEntity(&quot;Male&quot;);
+	var female = ppl.createEntity(&quot;Female&quot;);
+	var bornIn = ppl.createRelation(&quot;bornIn&quot;);
+	var oguz = male.createSubEntity(&quot;Oguz&quot;);
+	var oguzYear = ppl.createLiteral(1993);
+	oguz.addRelation(bornIn, oguzYear);
 	*/
 
 	define(function(){
 
-		var addRelation = function(relation, target){
+		var createLiteral = function(value){
+
+			var Literal = require(&#x27;CORE/Literal/Literal&#x27;);
+			var Utils = require(&#x27;CORE/Utils/Utils&#x27;);
+			var createLiteralException = require(&#x27;CORE/Exception/createLiteralException&#x27;);
+
+			// Cannot be blank
+			if (value===null || value===undefined){ throw new createLiteralException(&quot;Argument of &#x27;createLiteral&#x27; is blank or empty.&quot;); }
+			// Unique name should be created for the Ontology object.
+			if (!this.name){ throw new createLiteralException(&quot;Unique name of the ontology should be set before creating any literals.&quot;); }
+			// Unique domain should be created for the Ontology object.
+			if (!this.domain){ throw new createLiteralException(&quot;Unique domain of the ontology should be set before creating any literals.&quot;); }
 			
-			var createEntityException = require(&#x27;CORE/Exception/createEntityException&#x27;);
-			var addRelationException = require(&#x27;CORE/Exception/addRelationException&#x27;);
-
-			// type checks
-			if (typeof relation !== &quot;object&quot; || !relation.type || relation.type !== &quot;relation&quot;){
-				throw new addRelationException(&quot;The first argument of addRelation must be a relation object.&quot;);
+			// Create a literal with an absolute unique ID with dynamic lenght
+			var randomLength = 3;
+			var randomID = Utils.randomString(randomLength);
+			var URI = Utils.createURI(randomID, this.domain, &#x27;literal&#x27;);
+			var tryCount = 0;
+			var tryCountLimit = 20;
+			while(this.occupiedURIs.indexOf(URI)!=-1){
+				randomID = Utils.randomString(randomLength);
+				URI = Utils.createURI(randomID, this.domain, &#x27;literal&#x27;);
+				tryCount++;
+				if (tryCount&gt;=tryCountLimit){
+					randomLength++;
+					tryCount=0;
+				}
 			}
-			if (typeof target !== &quot;object&quot; || !target.type || (target.type !== &quot;entity&quot; &amp;&amp; target.type !== &quot;literal&quot;)){
-				throw new addRelationException(&quot;The second argument of addRelation must be a entity or literal object.&quot;);
-			}
-
-			// add the relation to the relout of the source object
-			this.relOut.push([relation, target]);
-
-			// add the relation to the relin of the target object if entity
-			if (target.type === &quot;entity&quot;){ target.relIn.push([relation, this]); }
 			
+			this.occupiedURIs.push(URI);
+			var literal = new Literal(value);
+			literal.ontology = this;
+			literal.URI = URI;
+			if (SEMANTICS.debug){ console.log(&quot;Literal &#x27;&quot;+value.toString()+&quot;&#x27; created (&quot;+URI+&quot;).&quot;); }
+			return literal;
 		};
 
-		return addRelation;
+		return createLiteral;
 	});
     </pre>
 </div>

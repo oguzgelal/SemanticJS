@@ -9,7 +9,8 @@ define(function(){
 	
 	var Utils = {
 		createURI: require('CORE/Utils/createURI'),
-		stripDomain: require('CORE/Utils/stripDomain')
+		stripDomain: require('CORE/Utils/stripDomain'),
+		randomString: require('CORE/Utils/randomString')
 	};
 
 	return Utils;

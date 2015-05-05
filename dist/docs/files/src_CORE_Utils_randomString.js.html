@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/CORE/Relation/addRelation.js - SemanticJS</title>
+    <title>src/CORE/Utils/randomString.js - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -89,52 +89,29 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/CORE/Relation/addRelation.js</h1>
+<h1 class="file-heading">File: src/CORE/Utils/randomString.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-Adds a relation from an entity to another entity or literal.
+Creates a random string
 
-@event addRelation
-@for CORE.Entity
-@throws {addRelationException} Cannot add relation.
-@param {Object} relation The object of relation to be added.
-@param {Object} target The target object. Could be an entity or literal object.
-@example
-	var semantics = new Semant();
-	var geo = semantics.createOntology(&quot;Geo&quot;, &quot;http://geo.com&quot;);
-	var in = geo.createRelation(&quot;in&quot;);
-	var turkey = geo.createEntity(&quot;Turkey&quot;);
-	var istanbul = geo.createEntity(&quot;Istanbul&quot;);
-	istanbul.addRelation(in, turkey);
-	*/
+@method randomString
+@for CORE.Utils
+@param {Integer} n The lenght of the random string to be created
+*/
 
-	define(function(){
+define(function(){
 
-		var addRelation = function(relation, target){
-			
-			var createEntityException = require(&#x27;CORE/Exception/createEntityException&#x27;);
-			var addRelationException = require(&#x27;CORE/Exception/addRelationException&#x27;);
+	var randomString = function(n){
+		var text = &quot;&quot;;
+		var possible = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&quot;;
+		for(var i=0; i&lt;n; i++){ text += possible.charAt(Math.floor(Math.random() * possible.length)); }
+		return text;
+	};
 
-			// type checks
-			if (typeof relation !== &quot;object&quot; || !relation.type || relation.type !== &quot;relation&quot;){
-				throw new addRelationException(&quot;The first argument of addRelation must be a relation object.&quot;);
-			}
-			if (typeof target !== &quot;object&quot; || !target.type || (target.type !== &quot;entity&quot; &amp;&amp; target.type !== &quot;literal&quot;)){
-				throw new addRelationException(&quot;The second argument of addRelation must be a entity or literal object.&quot;);
-			}
-
-			// add the relation to the relout of the source object
-			this.relOut.push([relation, target]);
-
-			// add the relation to the relin of the target object if entity
-			if (target.type === &quot;entity&quot;){ target.relIn.push([relation, this]); }
-			
-		};
-
-		return addRelation;
-	});
+	return randomString;
+});
     </pre>
 </div>
                     </div>

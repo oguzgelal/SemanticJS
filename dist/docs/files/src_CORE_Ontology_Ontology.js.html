@@ -43,10 +43,13 @@
                                 <li><a href="../classes/CORE.Exception.html">CORE.Exception</a></li>
                                 <li><a href="../classes/CORE.Exception.addRelationException.html">CORE.Exception.addRelationException</a></li>
                                 <li><a href="../classes/CORE.Exception.createEntityException.html">CORE.Exception.createEntityException</a></li>
+                                <li><a href="../classes/CORE.Exception.createLiteralException.html">CORE.Exception.createLiteralException</a></li>
                                 <li><a href="../classes/CORE.Exception.createOntologyException.html">CORE.Exception.createOntologyException</a></li>
                                 <li><a href="../classes/CORE.Exception.createRelationException.html">CORE.Exception.createRelationException</a></li>
                                 <li><a href="../classes/CORE.Exception.createURIException.html">CORE.Exception.createURIException</a></li>
                                 <li><a href="../classes/CORE.Exception.makeSubEntityException.html">CORE.Exception.makeSubEntityException</a></li>
+                                <li><a href="../classes/CORE.Export.html">CORE.Export</a></li>
+                                <li><a href="../classes/CORE.Literal.html">CORE.Literal</a></li>
                                 <li><a href="../classes/CORE.Ontology.html">CORE.Ontology</a></li>
                                 <li><a href="../classes/CORE.Relation.html">CORE.Relation</a></li>
                                 <li><a href="../classes/CORE.Utils.html">CORE.Utils</a></li>
@@ -145,6 +148,7 @@ define(function(){
 
 	Ontology.prototype.createEntity = require(&#x27;CORE/Entity/createEntity&#x27;);
 	Ontology.prototype.createRelation = require(&#x27;CORE/Relation/createRelation&#x27;);
+	Ontology.prototype.createLiteral = require(&#x27;CORE/Literal/createLiteral&#x27;);
 
 	return Ontology;
 });

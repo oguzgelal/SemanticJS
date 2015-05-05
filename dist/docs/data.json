@@ -79,6 +79,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/CORE/Exception/createLiteralException.js": {
+            "name": "src/CORE/Exception/createLiteralException.js",
+            "modules": {},
+            "classes": {
+                "CORE.Exception.createLiteralException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/CORE/Exception/createOntologyException.js": {
             "name": "src/CORE/Exception/createOntologyException.js",
             "modules": {},
@@ -113,6 +122,33 @@
                 "CORE.Exception.makeSubEntityException": 1
             },
             "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Export/Export.js": {
+            "name": "src/CORE/Export/Export.js",
+            "modules": {},
+            "classes": {
+                "CORE.Export": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Literal/Literal.js": {
+            "name": "src/CORE/Literal/Literal.js",
+            "modules": {},
+            "classes": {
+                "CORE.Literal": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Literal/createLiteral.js": {
+            "name": "src/CORE/Literal/createLiteral.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Ontology": 1
+            },
             "namespaces": {}
         },
         "src/CORE/Ontology/Ontology.js": {
@@ -171,6 +207,15 @@
         },
         "src/CORE/Utils/createURI.js": {
             "name": "src/CORE/Utils/createURI.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Utils": 1
+            },
+            "namespaces": {}
+        },
+        "src/CORE/Utils/randomString.js": {
+            "name": "src/CORE/Utils/randomString.js",
             "modules": {},
             "classes": {},
             "fors": {
@@ -302,6 +347,27 @@
             ],
             "extends": "CORE.Exception"
         },
+        "CORE.Exception.createLiteralException": {
+            "name": "CORE.Exception.createLiteralException",
+            "shortname": "CORE.Exception.createLiteralException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Exception/createLiteralException.js",
+            "line": 1,
+            "description": "Literal cannot be created exception",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Information on why the literal could not be created.",
+                    "type": "String"
+                }
+            ],
+            "extends": "CORE.Exception"
+        },
         "CORE.Exception.createOntologyException": {
             "name": "CORE.Exception.createOntologyException",
             "shortname": "CORE.Exception.createOntologyException",
@@ -385,6 +451,37 @@
                 }
             ],
             "extends": "CORE.Exception"
+        },
+        "CORE.Export": {
+            "name": "CORE.Export",
+            "shortname": "CORE.Export",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Export/Export.js",
+            "line": 1,
+            "is_constructor": 1
+        },
+        "CORE.Literal": {
+            "name": "CORE.Literal",
+            "shortname": "CORE.Literal",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Literal/Literal.js",
+            "line": 1,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Value of the literal",
+                    "type": "String"
+                }
+            ]
         },
         "CORE.Relation": {
             "name": "CORE.Relation",
@@ -689,6 +786,77 @@
             "class": "CORE.Exception"
         },
         {
+            "file": "src/CORE/Literal/Literal.js",
+            "line": 10,
+            "description": "For identifying an instance",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "class": "CORE.Literal"
+        },
+        {
+            "file": "src/CORE/Literal/Literal.js",
+            "line": 16,
+            "description": "Literal type (\"integer\", \"string\" etc...)",
+            "itemtype": "property",
+            "name": "literaltype",
+            "type": "String",
+            "class": "CORE.Literal"
+        },
+        {
+            "file": "src/CORE/Literal/Literal.js",
+            "line": 22,
+            "description": "URI of the entity",
+            "itemtype": "property",
+            "name": "URI",
+            "type": "String",
+            "class": "CORE.Literal"
+        },
+        {
+            "file": "src/CORE/Literal/Literal.js",
+            "line": 28,
+            "description": "Value of the literal",
+            "itemtype": "property",
+            "name": "value",
+            "type": "Dynamic",
+            "class": "CORE.Literal"
+        },
+        {
+            "file": "src/CORE/Literal/Literal.js",
+            "line": 34,
+            "description": "The ontology this entity is created under",
+            "itemtype": "property",
+            "name": "ontology",
+            "type": "Object",
+            "class": "CORE.Literal"
+        },
+        {
+            "file": "src/CORE/Literal/createLiteral.js",
+            "line": 1,
+            "description": "Creates a literal",
+            "itemtype": "method",
+            "name": "createLiteral",
+            "throws": {
+                "description": "Cannot create literal.",
+                "type": "CreateLiteralException"
+            },
+            "params": [
+                {
+                    "name": "value",
+                    "description": "The object of relation to be added.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns the created Relation object.",
+                "type": "Literal"
+            },
+            "example": [
+                "\n\tvar ppl = semantics.createOntology(\"People\", \"http://ppl.com\");\n\tvar male = ppl.createEntity(\"Male\");\n\tvar female = ppl.createEntity(\"Female\");\n\tvar bornIn = ppl.createRelation(\"bornIn\");\n\tvar oguz = male.createSubEntity(\"Oguz\");\n\tvar oguzYear = ppl.createLiteral(1993);\n\toguz.addRelation(bornIn, oguzYear);"
+            ],
+            "class": "CORE.Ontology"
+        },
+        {
             "file": "src/CORE/Ontology/Ontology.js",
             "line": 13,
             "description": "For identifying an instance",
@@ -841,7 +1009,7 @@
         {
             "file": "src/CORE/Relation/createRelation.js",
             "line": 1,
-            "description": "Adds a relation from an entity to another entity or literal.",
+            "description": "Creates a relation.",
             "itemtype": "method",
             "name": "createRelation",
             "throws": {
@@ -889,6 +1057,21 @@
             ],
             "example": [
                 "\n\tconsole.log(createURI(\"People\", \"http://abc.com\", \"ontology\")); //will output - http://abc.com/ontology/People"
+            ],
+            "class": "CORE.Utils"
+        },
+        {
+            "file": "src/CORE/Utils/randomString.js",
+            "line": 1,
+            "description": "Creates a random string",
+            "itemtype": "method",
+            "name": "randomString",
+            "params": [
+                {
+                    "name": "n",
+                    "description": "The lenght of the random string to be created",
+                    "type": "Integer"
+                }
             ],
             "class": "CORE.Utils"
         },

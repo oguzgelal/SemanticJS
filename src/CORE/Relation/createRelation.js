@@ -1,5 +1,5 @@
 /**
-Adds a relation from an entity to another entity or literal.
+Creates a relation.
 
 @method createRelation
 @for CORE.Ontology
@@ -25,9 +25,9 @@ Adds a relation from an entity to another entity or literal.
 			// Cannot be blank
 			if (!name || (name && name.length === 0)){ throw new createRelationException("Argument of 'createRelation' is blank or empty."); }
 			// Unique name should be created for the Ontology object.
-			if (!this.name){ throw new createRelationException("Unique name of the ontology should be set before creating any entities."); }
+			if (!this.name){ throw new createRelationException("Unique name of the ontology should be set before creating any relations."); }
 			// Unique domain should be created for the Ontology object.
-			if (!this.domain){ throw new createRelationException("Unique domain of the ontology should be set before creating any entities."); }
+			if (!this.domain){ throw new createRelationException("Unique domain of the ontology should be set before creating any relations."); }
 			
 			var URI = Utils.createURI(name, this.domain, 'relation');
 			if (this.occupiedURIs.indexOf(URI)!=-1){

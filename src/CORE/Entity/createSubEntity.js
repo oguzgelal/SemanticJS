@@ -33,6 +33,7 @@ Creates an entity. Called from another entity object.
 				this.ontology.occupiedURIs.push(URI);
 
 				var entity = new Entity(name);
+				entity.URI = URI;
 				// set the parent of the sub entity to current entity.
 				entity.parent = this;
 				// pass the context of the current entity to the sub entity being created.

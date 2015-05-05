@@ -1,6 +1,6 @@
 ;(function(window, document, navigator, undefined) {
 var SEMANTICS={debug:true};
-var CORE_Exception_Exception, CORE_Exception_createURIException, CORE_Utils_createURI, CORE_Utils_stripDomain, CORE_Utils_Utils, CORE_Exception_createEntityException, CORE_Entity_createSubEntity, CORE_Exception_makeSubEntityException, CORE_Entity_makeSubEntity, CORE_Exception_addRelationException, CORE_Relation_addRelation, CORE_Entity_Entity, CORE_Entity_createEntity, CORE_Relation_Relation, CORE_Exception_createRelationException, CORE_Relation_createRelation, CORE_Ontology_Ontology, CORE_Exception_createOntologyException, CORE_Ontology_createOntology, API_Semant;
+var CORE_Exception_Exception, CORE_Exception_createURIException, CORE_Utils_createURI, CORE_Utils_stripDomain, CORE_Utils_randomString, CORE_Utils_Utils, CORE_Exception_createEntityException, CORE_Entity_createSubEntity, CORE_Exception_makeSubEntityException, CORE_Entity_makeSubEntity, CORE_Exception_addRelationException, CORE_Relation_addRelation, CORE_Entity_Entity, CORE_Entity_createEntity, CORE_Relation_Relation, CORE_Exception_createRelationException, CORE_Relation_createRelation, CORE_Literal_Literal, CORE_Exception_createLiteralException, CORE_Literal_createLiteral, CORE_Ontology_Ontology, CORE_Exception_createOntologyException, CORE_Ontology_createOntology, API_Semant;
 CORE_Exception_Exception = function () {
   function Exception() {
     this.code = undefined;
@@ -79,10 +79,22 @@ CORE_Utils_stripDomain = function () {
   };
   return stripDomain;
 }();
+CORE_Utils_randomString = function () {
+  var randomString = function (n) {
+    var text = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < n; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  };
+  return randomString;
+}();
 CORE_Utils_Utils = function () {
   var Utils = {
     createURI: CORE_Utils_createURI,
-    stripDomain: CORE_Utils_stripDomain
+    stripDomain: CORE_Utils_stripDomain,
+    randomString: CORE_Utils_randomString
   };
   return Utils;
 }();
@@ -117,6 +129,7 @@ CORE_Entity_createSubEntity = function () {
     } else {
       this.ontology.occupiedURIs.push(URI);
       var entity = new Entity(name);
+      entity.URI = URI;
       entity.parent = this;
       entity.ontology = this.ontology;
       this.subs[name] = entity;
@@ -283,10 +296,10 @@ CORE_Relation_createRelation = function () {
       throw new createRelationException('Argument of \'createRelation\' is blank or empty.');
     }
     if (!this.name) {
-      throw new createRelationException('Unique name of the ontology should be set before creating any entities.');
+      throw new createRelationException('Unique name of the ontology should be set before creating any relations.');
     }
     if (!this.domain) {
-      throw new createRelationException('Unique domain of the ontology should be set before creating any entities.');
+      throw new createRelationException('Unique domain of the ontology should be set before creating any relations.');
     }
     var URI = Utils.createURI(name, this.domain, 'relation');
     if (this.occupiedURIs.indexOf(URI) != -1) {
@@ -304,6 +317,69 @@ CORE_Relation_createRelation = function () {
   };
   return createRelation;
 }();
+CORE_Literal_Literal = function () {
+  function Literal(value) {
+    this.type = 'literal';
+    this.literaltype = typeof value;
+    this.URI = null;
+    this.value = value;
+    this.ontology = null;
+  }
+  return Literal;
+}();
+CORE_Exception_createLiteralException = function () {
+  var Exception = CORE_Exception_Exception;
+  function createLiteralException(message) {
+    this.code = 4;
+    this.name = 'Create literal failed';
+    this.notice = 'Literal cannot be created';
+    this.message = message;
+    if (SEMANTICS.debug) {
+      console.log(this.details());
+    }
+  }
+  createLiteralException.prototype = new Exception();
+  return createLiteralException;
+}();
+CORE_Literal_createLiteral = function () {
+  var createLiteral = function (value) {
+    var Literal = CORE_Literal_Literal;
+    var Utils = CORE_Utils_Utils;
+    var createLiteralException = CORE_Exception_createLiteralException;
+    if (value === null || value === undefined) {
+      throw new createLiteralException('Argument of \'createLiteral\' is blank or empty.');
+    }
+    if (!this.name) {
+      throw new createLiteralException('Unique name of the ontology should be set before creating any literals.');
+    }
+    if (!this.domain) {
+      throw new createLiteralException('Unique domain of the ontology should be set before creating any literals.');
+    }
+    var randomLength = 3;
+    var randomID = Utils.randomString(randomLength);
+    var URI = Utils.createURI(randomID, this.domain, 'literal');
+    var tryCount = 0;
+    var tryCountLimit = 20;
+    while (this.occupiedURIs.indexOf(URI) != -1) {
+      randomID = Utils.randomString(randomLength);
+      URI = Utils.createURI(randomID, this.domain, 'literal');
+      tryCount++;
+      if (tryCount >= tryCountLimit) {
+        randomLength++;
+        tryCount = 0;
+      }
+    }
+    this.occupiedURIs.push(URI);
+    var literal = new Literal(value);
+    literal.ontology = this;
+    literal.URI = URI;
+    if (SEMANTICS.debug) {
+      console.log('Literal \'' + value.toString() + '\' created (' + URI + ').');
+    }
+    return literal;
+  };
+  return createLiteral;
+}();
 CORE_Ontology_Ontology = function () {
   function Ontology(name, domain) {
     this.type = 'ontology';
@@ -315,6 +391,7 @@ CORE_Ontology_Ontology = function () {
   }
   Ontology.prototype.createEntity = CORE_Entity_createEntity;
   Ontology.prototype.createRelation = CORE_Relation_createRelation;
+  Ontology.prototype.createLiteral = CORE_Literal_createLiteral;
   return Ontology;
 }();
 CORE_Exception_createOntologyException = function () {

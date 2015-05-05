@@ -53,6 +53,7 @@ define(function(){
 
 	Ontology.prototype.createEntity = require('CORE/Entity/createEntity');
 	Ontology.prototype.createRelation = require('CORE/Relation/createRelation');
+	Ontology.prototype.createLiteral = require('CORE/Literal/createLiteral');
 
 	return Ontology;
 });
