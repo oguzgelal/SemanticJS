@@ -115,6 +115,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/CORE/Exception/exportOWLException.js": {
+            "name": "src/CORE/Exception/exportOWLException.js",
+            "modules": {},
+            "classes": {
+                "CORE.Exception.exportOWLException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/CORE/Exception/makeSubEntityException.js": {
             "name": "src/CORE/Exception/makeSubEntityException.js",
             "modules": {},
@@ -131,6 +140,15 @@
                 "CORE.Export": 1
             },
             "fors": {},
+            "namespaces": {}
+        },
+        "src/CORE/Export/exportOWL.js": {
+            "name": "src/CORE/Export/exportOWL.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "CORE.Export": 1
+            },
             "namespaces": {}
         },
         "src/CORE/Literal/Literal.js": {
@@ -431,6 +449,27 @@
             ],
             "extends": "CORE.Exception"
         },
+        "CORE.Exception.exportOWLException": {
+            "name": "CORE.Exception.exportOWLException",
+            "shortname": "CORE.Exception.exportOWLException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/CORE/Exception/exportOWLException.js",
+            "line": 1,
+            "description": "Ontology cannot be exported into OWL format",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Information on why the export cannot be completed.",
+                    "type": "String"
+                }
+            ],
+            "extends": "CORE.Exception"
+        },
         "CORE.Exception.makeSubEntityException": {
             "name": "CORE.Exception.makeSubEntityException",
             "shortname": "CORE.Exception.makeSubEntityException",
@@ -462,7 +501,7 @@
             "extension_for": [],
             "file": "src/CORE/Export/Export.js",
             "line": 1,
-            "is_constructor": 1
+            "static": 1
         },
         "CORE.Literal": {
             "name": "CORE.Literal",
@@ -786,6 +825,34 @@
             "class": "CORE.Exception"
         },
         {
+            "file": "src/CORE/Export/exportOWL.js",
+            "line": 1,
+            "description": "Creates an entity. Called from the Ontology object.",
+            "itemtype": "method",
+            "name": "exportOWL",
+            "throws": {
+                "description": "Exportation failed",
+                "type": "ExportOWLException"
+            },
+            "params": [
+                {
+                    "name": "ontology",
+                    "description": "The ontology object",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "Rules of exportation in key / value pairs",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns the contents of the OWL file output",
+                "type": "String"
+            },
+            "class": "CORE.Export"
+        },
+        {
             "file": "src/CORE/Literal/Literal.js",
             "line": 10,
             "description": "For identifying an instance",
@@ -905,6 +972,15 @@
         {
             "file": "src/CORE/Ontology/Ontology.js",
             "line": 44,
+            "itemtype": "property",
+            "name": "relationCollection",
+            "type": "Object {Relation name, Relation}",
+            "default": "{}",
+            "class": "CORE.Ontology"
+        },
+        {
+            "file": "src/CORE/Ontology/Ontology.js",
+            "line": 50,
             "description": "Keeps every URI created under this ontology. Will be used for uniqueness check.",
             "itemtype": "property",
             "name": "occupiedURIs",
@@ -977,6 +1053,24 @@
             "itemtype": "property",
             "name": "ontology",
             "type": "Object",
+            "class": "CORE.Relation"
+        },
+        {
+            "file": "src/CORE/Relation/Relation.js",
+            "line": 34,
+            "itemtype": "property",
+            "name": "domains",
+            "type": "Object {Entity name, Entity}",
+            "default": "{}",
+            "class": "CORE.Relation"
+        },
+        {
+            "file": "src/CORE/Relation/Relation.js",
+            "line": 40,
+            "itemtype": "property",
+            "name": "ranges",
+            "type": "Object {Entity name, Entity}",
+            "default": "{}",
             "class": "CORE.Relation"
         },
         {

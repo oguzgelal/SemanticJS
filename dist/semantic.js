@@ -197,6 +197,8 @@ CORE_Relation_addRelation = function () {
     if (typeof target !== 'object' || !target.type || target.type !== 'entity' && target.type !== 'literal') {
       throw new addRelationException('The second argument of addRelation must be a entity or literal object.');
     }
+    relation.domains[this.name] = this;
+    relation.ranges[target.name] = target;
     this.relOut.push([
       relation,
       target
@@ -267,6 +269,8 @@ CORE_Relation_Relation = function () {
     this.name = name;
     this.URI = null;
     this.ontology = null;
+    this.domains = {};
+    this.ranges = {};
   }
   return Relation;
 }();
@@ -309,6 +313,7 @@ CORE_Relation_createRelation = function () {
       var relation = new Relation(name);
       relation.ontology = this;
       relation.URI = URI;
+      this.relationCollection[name] = relation;
       if (SEMANTICS.debug) {
         console.log('Relation \'' + name + '\' created.');
       }
@@ -387,6 +392,7 @@ CORE_Ontology_Ontology = function () {
     this.URI = null;
     this.domain = domain;
     this.entityCollection = {};
+    this.relationCollection = {};
     this.occupiedURIs = [];
   }
   Ontology.prototype.createEntity = CORE_Entity_createEntity;

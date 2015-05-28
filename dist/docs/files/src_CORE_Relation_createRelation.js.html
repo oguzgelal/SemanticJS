@@ -47,6 +47,7 @@
                                 <li><a href="../classes/CORE.Exception.createOntologyException.html">CORE.Exception.createOntologyException</a></li>
                                 <li><a href="../classes/CORE.Exception.createRelationException.html">CORE.Exception.createRelationException</a></li>
                                 <li><a href="../classes/CORE.Exception.createURIException.html">CORE.Exception.createURIException</a></li>
+                                <li><a href="../classes/CORE.Exception.exportOWLException.html">CORE.Exception.exportOWLException</a></li>
                                 <li><a href="../classes/CORE.Exception.makeSubEntityException.html">CORE.Exception.makeSubEntityException</a></li>
                                 <li><a href="../classes/CORE.Export.html">CORE.Export</a></li>
                                 <li><a href="../classes/CORE.Literal.html">CORE.Literal</a></li>
@@ -133,6 +134,7 @@ Creates a relation.
 				var relation = new Relation(name);
 				relation.ontology = this;
 				relation.URI = URI;
+				this.relationCollection[name] = relation;
 				if (SEMANTICS.debug){ console.log(&quot;Relation &#x27;&quot;+name+&quot;&#x27; created.&quot;); }
 				return relation;
 			}

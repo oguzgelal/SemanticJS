@@ -47,6 +47,7 @@
                                 <li><a href="../classes/CORE.Exception.createOntologyException.html">CORE.Exception.createOntologyException</a></li>
                                 <li><a href="../classes/CORE.Exception.createRelationException.html">CORE.Exception.createRelationException</a></li>
                                 <li><a href="../classes/CORE.Exception.createURIException.html">CORE.Exception.createURIException</a></li>
+                                <li><a href="../classes/CORE.Exception.exportOWLException.html">CORE.Exception.exportOWLException</a></li>
                                 <li><a href="../classes/CORE.Exception.makeSubEntityException.html">CORE.Exception.makeSubEntityException</a></li>
                                 <li><a href="../classes/CORE.Export.html">CORE.Export</a></li>
                                 <li><a href="../classes/CORE.Literal.html">CORE.Literal</a></li>
@@ -95,14 +96,14 @@
     <pre class="code prettyprint linenums">
 /**
 @class CORE.Export
-@constructor
+@static
 */
 
 define(function(){
 	
 	function Export() {
-		
 	}
+	Export.prototype.exportOWL = require(&#x27;CORE/Export/exportOWL&#x27;);
 
 	return Export;
 });

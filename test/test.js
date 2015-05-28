@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 	var semantics = new Semant();
+	
 	var geo = semantics.createOntology("Geo", "http://geo.com");
 	var inloc = geo.createRelation("in");
 	var turkey = geo.createEntity("Turkey");
@@ -17,8 +18,8 @@ $(document).ready(function(){
 	var oguzDate = ppl.createLiteral(1993);
 	oguz.addRelation(bornIn, oguzDate);
 
-	console.log(oguz);
-	console.log(oguzDate);
-	console.log(bornIn);
+	console.log(geo);
+	console.log(ppl);
+
 
 });

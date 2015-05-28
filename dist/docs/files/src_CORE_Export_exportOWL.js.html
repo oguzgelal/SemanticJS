@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/CORE/Exception/createEntityException.js - SemanticJS</title>
+    <title>src/CORE/Export/exportOWL.js - SemanticJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -90,34 +90,46 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/CORE/Exception/createEntityException.js</h1>
+<h1 class="file-heading">File: src/CORE/Export/exportOWL.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-Entity cannot be created exception
+Creates an entity. Called from the Ontology object.
 
-@class CORE.Exception.createEntityException
-@constructor
-@param {String} message Information on why the entity could not be created.
-@extends CORE.Exception
+@method exportOWL
+@for CORE.Export
+@throws {exportOWLException} Exportation failed
+@param {Object} ontology The ontology object
+@param {Object} options Rules of exportation in key / value pairs
+@return {String} Returns the contents of the OWL file output
 */
 
 define(function(){
 	
-	var Exception = require(&#x27;CORE/Exception/Exception&#x27;);
-
-	function createEntityException(message){
-		this.code = 0;
-		this.name = &quot;Create entity failed&quot;;
-		this.notice = &quot;Entity cannot be created&quot;;
-		this.message = message;
-		if (SEMANTICS.debug){ console.log(this.details()); }
+	function plugRelation(relation, options){
+		var plug = &quot;&quot;;
+		plug+=&quot;&lt;!-- &quot;+relation.URI+&quot; --&gt;&quot;;
+		plug+=&quot;&lt;owl:ObjectProperty rdf:about=&#x27;&quot;+relation.URI+&quot;&#x27;&gt;&quot;;
+		// add domain data
+		if (relation.domains.length &gt; 0){
+			plug+=&quot;&lt;rdfs:domain&gt;&quot;;
+			plug+=&quot;&lt;owl:Class&gt;&quot;;
+			for(var i=0; i&lt;relation.domains.length; i++){
+				
+			}
+			plug+=&quot;&lt;/owl:Class&gt;&quot;;
+			plug+=&quot;&lt;/rdfs:domain&gt;&quot;;
+		}
+		plug+=&quot;&lt;/owl:ObjectProperty&gt;&quot;;
 	}
-	// subclass.prototype = new baseclass();
-	createEntityException.prototype = new Exception();
 
-	return createEntityException;
+	function exportOWL(ontology, options){
+		var output = &quot;&quot;;
+
+	}
+
+	return exportOWL;
 });
     </pre>
 </div>

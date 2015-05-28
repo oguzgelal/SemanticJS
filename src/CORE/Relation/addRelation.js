@@ -30,6 +30,10 @@ Adds a relation from an entity to another entity or literal.
 				throw new addRelationException("The second argument of addRelation must be a entity or literal object.");
 			}
 
+			// add domain entity object to domains
+			relation.domains[this.name] = this;
+			// add range entity object to ranges
+			relation.ranges[target.name] = target;
 			// add the relation to the relout of the source object
 			this.relOut.push([relation, target]);
 

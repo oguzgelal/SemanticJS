@@ -42,6 +42,12 @@ define(function(){
 		*/
 		this.entityCollection = {};
 		/**
+		@property relationCollection
+		@type Object {Relation name, Relation}
+		@default {}
+		*/
+		this.relationCollection = {};
+		/**
 		Keeps every URI created under this ontology. Will be used for uniqueness check.
 		@property occupiedURIs
 		@type String Array

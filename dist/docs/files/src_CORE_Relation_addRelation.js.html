@@ -47,6 +47,7 @@
                                 <li><a href="../classes/CORE.Exception.createOntologyException.html">CORE.Exception.createOntologyException</a></li>
                                 <li><a href="../classes/CORE.Exception.createRelationException.html">CORE.Exception.createRelationException</a></li>
                                 <li><a href="../classes/CORE.Exception.createURIException.html">CORE.Exception.createURIException</a></li>
+                                <li><a href="../classes/CORE.Exception.exportOWLException.html">CORE.Exception.exportOWLException</a></li>
                                 <li><a href="../classes/CORE.Exception.makeSubEntityException.html">CORE.Exception.makeSubEntityException</a></li>
                                 <li><a href="../classes/CORE.Export.html">CORE.Export</a></li>
                                 <li><a href="../classes/CORE.Literal.html">CORE.Literal</a></li>
@@ -125,6 +126,10 @@ Adds a relation from an entity to another entity or literal.
 				throw new addRelationException(&quot;The second argument of addRelation must be a entity or literal object.&quot;);
 			}
 
+			// add domain entity object to domains
+			relation.domains[this.name] = this;
+			// add range entity object to ranges
+			relation.ranges[target.name] = target;
 			// add the relation to the relout of the source object
 			this.relOut.push([relation, target]);
 

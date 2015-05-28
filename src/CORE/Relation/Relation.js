@@ -31,6 +31,18 @@ define(function(){
 		@type Object
 		*/
 		this.ontology = null;
+		/**
+		@property domains
+		@type Object {Entity name, Entity}
+		@default {}
+		*/
+		this.domains = {};
+		/**
+		@property ranges
+		@type Object {Entity name, Entity}
+		@default {}
+		*/
+		this.ranges = {};
 	}
 
 	return Relation;

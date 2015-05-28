@@ -38,6 +38,7 @@ Creates a relation.
 				var relation = new Relation(name);
 				relation.ontology = this;
 				relation.URI = URI;
+				this.relationCollection[name] = relation;
 				if (SEMANTICS.debug){ console.log("Relation '"+name+"' created."); }
 				return relation;
 			}
