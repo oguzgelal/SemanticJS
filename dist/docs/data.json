@@ -878,6 +878,16 @@
             "class": "CORE.Export"
         },
         {
+            "file": "src/CORE/Export/exportOWL.js",
+            "line": 55,
+            "class": "CORE.Export"
+        },
+        {
+            "file": "src/CORE/Export/exportOWL.js",
+            "line": 80,
+            "class": "CORE.Export"
+        },
+        {
             "file": "src/CORE/Literal/Literal.js",
             "line": 10,
             "description": "For identifying an instance",
@@ -1210,5 +1220,14 @@
             "class": "CORE.Utils"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " src/CORE/Export/exportOWL.js:55"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/CORE/Export/exportOWL.js:80"
+        }
+    ]
 }
