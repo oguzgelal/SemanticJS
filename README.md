@@ -2,12 +2,9 @@
 SemanticJS
 =====
 
-This is *(will be)* an open-source javascript library for building **Semantic Web** and **Linked Data** application, similar to <a href='http://owlapi.sourceforge.net/' target='_new'>OWL API</a> and <a href='https://jena.apache.org/' target='_new'>Jena API</a>. You will be able to create Ontologies, Entities, Relationships, link those and *(hopefully)* run the reasoner.
+This is an open-source javascript library for building **Semantic Web** and **Linked Data** application, similar to <a href='http://owlapi.sourceforge.net/' target='_new'>OWL API</a> and <a href='https://jena.apache.org/' target='_new'>Jena API</a>.
 
-First note
------
-
-This is pretty new, this README will be updated with new informations. For now, you can contact me from <a href='http://oguzgelal.com/contact' target='_new'>oguzgelal.com/contact</a>.
+This library is pretty new, this README will be updated with new informations. For now, you can contact me from <a href='http://oguzgelal.com/contact' target='_new'>oguzgelal.com/contact</a>.
 
 Information
 ------
@@ -137,3 +134,16 @@ Exceptions
 All the exceptions inherits from `Exception` class at *Core/Exception/Exception.js*. They have `code`, `name`, `notice` *(what happened)* and `message` *(what caused it)*. All exceptions takes `message` field as an argument. Other details are coded into relevant class. 
 
 All exceptions have `.toString()` method which gives you the basic information about the exception, and `.details()` method which gives you detailed information. If **debug mode** is enables, detailed version will be written on the console when thrown.
+
+Export
+------
+
+The ontologies created using this library can be exported into OWL format. The export method will return the output as String.
+
+```Javascript
+var semantics = new Semant();
+var ontology = semantics.createOntology("SampleOnt", "http://domain.com");
+// ... fill up the ontology here ...
+var options = {};
+var owlout = semantics.Export.exportOWL(ontology, options);
+```
