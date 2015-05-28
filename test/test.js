@@ -19,7 +19,9 @@ $(document).ready(function(){
 	oguz.addRelation(bornIn, oguzDate);
 
 	console.log(geo);
-	console.log(ppl);
+	var owlout = semantics.Export.exportOWL(geo, {});
+	console.log(owlout);
+	//semantics.Export.exportOWL(ppl, {});
 
 
 });

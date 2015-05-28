@@ -5,9 +5,9 @@
 
 define(function(){
 	
-	function Export() {
-	}
-	Export.prototype.exportOWL = require('CORE/Export/exportOWL');
+	var Export = {
+		exportOWL: require('CORE/Export/exportOWL')
+	};
 
 	return Export;
 });

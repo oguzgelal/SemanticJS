@@ -19,6 +19,7 @@ module.exports = function(grunt) {
           // AMDClean for converting scripts into plain javascript
           // files instead of including almond AMD loader.
           onModuleBundleComplete: function (data) {
+            var version = grunt.config.data.pkg.version;
             var fs = require('fs'),
             amdclean = require('amdclean'),
             outputFile = data.path;
@@ -29,7 +30,7 @@ module.exports = function(grunt) {
               'createAnonymousAMDModule': true,
               // Wrap library in an Immediately Invoked Function Expression (IIFE)
               'wrap': {
-                'start': ';(function(window, document, navigator, undefined) {\nvar SEMANTICS={debug:true};\n',
+                'start': ';(function(window, document, navigator, undefined) {\nvar SEMANTICS={debug:true,version:"'+version+'"};\n',
                 'end': '\n}(typeof window !== "undefined" ? window : {}, typeof document !== "undefined" ? document : { createElement: function() {} }, typeof window !== "undefined" ? window.navigator : {}));'
               },
               'escodegen': { 'comment': false }

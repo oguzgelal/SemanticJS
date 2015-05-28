@@ -578,7 +578,17 @@
         },
         {
             "file": "src/API/Semant.js",
-            "line": 28,
+            "line": 29,
+            "description": "Export object",
+            "itemtype": "property",
+            "name": "Export",
+            "type": "Object",
+            "default": "Export Obj",
+            "class": "API.Semant"
+        },
+        {
+            "file": "src/API/Semant.js",
+            "line": 37,
             "description": "Change debug mode",
             "itemtype": "method",
             "name": "setDebug",
@@ -596,7 +606,7 @@
         },
         {
             "file": "src/API/Semant.js",
-            "line": 38,
+            "line": 47,
             "description": "Get debug mode",
             "itemtype": "method",
             "name": "getDebug",
@@ -606,6 +616,21 @@
             },
             "example": [
                 "\n\tsemantics.getDebug();"
+            ],
+            "class": "API.Semant"
+        },
+        {
+            "file": "src/API/Semant.js",
+            "line": 55,
+            "description": "Get version",
+            "itemtype": "method",
+            "name": "getVersion",
+            "return": {
+                "description": "Version number;",
+                "type": "String"
+            },
+            "example": [
+                "\n\tsemantics.getVersion();"
             ],
             "class": "API.Semant"
         },

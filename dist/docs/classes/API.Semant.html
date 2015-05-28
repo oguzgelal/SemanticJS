@@ -133,6 +133,10 @@
 
                             </li>
                             <li class="index-item method">
+                                <a href="#method_getVersion">getVersion</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_setDebug">setDebug</a>
 
                             </li>
@@ -143,6 +147,10 @@
                     <h3>Properties</h3>
 
                     <ul class="index-list properties">
+                            <li class="index-item property">
+                                <a href="#property_Export">Export</a>
+
+                            </li>
                             <li class="index-item property">
                                 <a href="#property_occupiedDomains">occupiedDomains</a>
 
@@ -276,7 +284,7 @@ var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&q
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_API_Semant.js.html#l38"><code>src&#x2F;API&#x2F;Semant.js:38</code></a>
+        <a href="../files/src_API_Semant.js.html#l47"><code>src&#x2F;API&#x2F;Semant.js:47</code></a>
         </p>
 
 
@@ -309,6 +317,57 @@ var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&q
             </div>
         </div>
 </div>
+<div id="method_getVersion" class="method item">
+    <h3 class="name"><code>getVersion</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_API_Semant.js.html#l55"><code>src&#x2F;API&#x2F;Semant.js:55</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get version</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>Version number;</p>
+
+            </div>
+        </div>
+
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>semantics.getVersion();
+</code></pre>
+            </div>
+        </div>
+</div>
 <div id="method_setDebug" class="method item">
     <h3 class="name"><code>setDebug</code></h3>
 
@@ -330,7 +389,7 @@ var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&q
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_API_Semant.js.html#l28"><code>src&#x2F;API&#x2F;Semant.js:28</code></a>
+        <a href="../files/src_API_Semant.js.html#l37"><code>src&#x2F;API&#x2F;Semant.js:37</code></a>
         </p>
 
 
@@ -376,6 +435,32 @@ var people = semantics.createOntology(&quot;People&quot;, &quot;http://ppl.com&q
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
+                    <div id="property_Export" class="property item">
+                        <h3 class="name"><code>Export</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_API_Semant.js.html#l29"><code>src&#x2F;API&#x2F;Semant.js:29</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Export object</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> Export Obj</p>
+                    
+                    
+                    </div>
                     <div id="property_occupiedDomains" class="property item">
                         <h3 class="name"><code>occupiedDomains</code></h3>
                         <span class="type">Array</span>
