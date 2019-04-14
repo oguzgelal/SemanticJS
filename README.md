@@ -4,8 +4,6 @@ SemanticJS
 
 This is an open-source javascript library for building **Semantic Web** and **Linked Data** application, similar to <a href='http://owlapi.sourceforge.net/' target='_new'>OWL API</a> and <a href='https://jena.apache.org/' target='_new'>Jena API</a>.
 
-This library is pretty new, this README will be updated with new informations. For now, you can contact me from <a href='http://oguzgelal.com/contact' target='_new'>oguzgelal.com/contact</a>.
-
 Information
 ------
 This library is **not dependant** to anything whatsoever. It is **lightweight**, **easy to install** and **easy to use**. It adpots the UMD (Universal Module Definition) standards, which makes it compatible with **AMD**, **CommonJS / Node.JS** and **Plain Browser Loading**. 
